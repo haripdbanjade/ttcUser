@@ -1,300 +1,24 @@
-import React, { useState } from 'react';
-import { Program } from '../types';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Clock, Book, Award, ArrowRight, Users, ChevronLeft, CheckCircle, Download, DollarSign, Briefcase, GraduationCap, HelpCircle, ChevronDown } from 'lucide-react';
-
-const programs: Program[] = [
-  {
-    id: 'science',
-    title: '+2 Science',
-    level: 'Plus 2',
-    description: 'A rigorous program designed for aspiring engineers, doctors, and scientists. Features state-of-the-art labs.',
-    duration: '2 Years (Class 11 & 12)',
-    image: 'https://picsum.photos/800/600?random=10',
-    overview: 'The +2 Science program at Tilottama College is a premier course designed to provide a strong foundation in physics, chemistry, biology, and mathematics. We focus on preparing students for competitive entrance examinations like IOE (Engineering) and IOM (Medical). Our approach combines theoretical learning with extensive practical sessions in our well-equipped laboratories.',
-    eligibility: [
-      'Passed SEE with minimum GPA 3.0',
-      'Minimum C+ grade in Science and Mathematics',
-      'Minimum D+ grade in English, Nepali, and Social Studies'
-    ],
-    feeStructure: 'Approx. NPR 60,000 per year (excluding admission and exam fees). Merit-based scholarships available.',
-    syllabus: [
-      'Physics (Mechanics, Thermodynamics, Electricity)',
-      'Chemistry (Physical, Organic, Inorganic)',
-      'Biology (Botany, Zoology) OR Mathematics',
-      'English',
-      'Nepali',
-      'Computer Science (Optional)'
-    ],
-    syllabusPdf: '#science-syllabus',
-    careerOpportunities: [
-      'Medical Doctor (MBBS, BDS)',
-      'Engineer (Civil, Computer, Electrical)',
-      'Biotechnologist',
-      'IT Professional',
-      'Researcher / Scientist'
-    ],
-    faculty: [
-      { name: "Dr. H.P. Sharma", role: "Physics HOD", image: "https://picsum.photos/200/200?random=60" },
-      { name: "Mr. R.K. Yadav", role: "Chemistry Senior Faculty", image: "https://picsum.photos/200/200?random=61" },
-      { name: "Mrs. S. Karki", role: "Biology Coordinator", image: "https://picsum.photos/200/200?random=62" }
-    ],
-    admissionRequirements: [
-      'Completed Online Application Form',
-      'Copy of SEE Marksheet and Character Certificate',
-      '2 Passport Size Photos',
-      'Pass Entrance Examination'
-    ],
-    gallery: [
-      'https://picsum.photos/400/300?random=70',
-      'https://picsum.photos/400/300?random=71',
-      'https://picsum.photos/400/300?random=72',
-      'https://picsum.photos/400/300?random=73'
-    ],
-    faq: [
-      {
-        question: "Is the bridge course mandatory?",
-        answer: "While not explicitly mandatory, we highly recommend taking the bridge course to cover the gap between the SEE curriculum and the +2 Science syllabus."
-      },
-      {
-        question: "Do you offer Medical/Engineering entrance preparation?",
-        answer: "Yes, we integrate entrance preparation classes (IOM & IOE) into our regular schedule, taught by experienced instructors."
-      },
-      {
-        question: "Can I choose both Biology and Mathematics?",
-        answer: "Yes, students can opt for Extra Math along with Biology to keep both Medical and Engineering options open."
-      }
-    ]
-  },
-  {
-    id: 'management',
-    title: '+2 Management',
-    level: 'Plus 2',
-    description: 'Comprehensive business education focusing on Accountancy, Economics, and Computer Science.',
-    duration: '2 Years (Class 11 & 12)',
-    image: 'https://picsum.photos/800/600?random=11',
-    overview: 'Our Management stream aims to produce capable mid-level human resources in the field of business and administration. Students learn the principles of accounting, economics, and business studies, along with practical skills in computer applications. We organize regular field visits and industrial tours.',
-    eligibility: [
-      'Passed SEE with minimum GPA 2.4',
-      'Minimum D+ grade in all subjects',
-      'Interest in business and commerce'
-    ],
-    feeStructure: 'Approx. NPR 45,000 per year. Various scholarship schemes available for deserving students.',
-    syllabus: [
-      'Accountancy',
-      'Economics',
-      'Business Studies',
-      'Social Studies',
-      'English & Nepali',
-      'Computer Science / Hotel Management'
-    ],
-    syllabusPdf: '#management-syllabus',
-    careerOpportunities: [
-      'Chartered Accountant (CA)',
-      'Banker',
-      'Business Entrepreneur',
-      'Hotel Manager',
-      'Marketing Executive'
-    ],
-    faculty: [
-      { name: "Mr. B.B. Singh", role: "Management Coordinator", image: "https://picsum.photos/200/200?random=63" },
-      { name: "Mrs. A. Tuladhar", role: "Accountancy Faculty", image: "https://picsum.photos/200/200?random=64" }
-    ],
-    admissionRequirements: [
-      'Completed Online Application Form',
-      'SEE Gradesheet',
-      'Entrance Interview'
-    ],
-    gallery: [
-      'https://picsum.photos/400/300?random=74',
-      'https://picsum.photos/400/300?random=75',
-      'https://picsum.photos/400/300?random=76'
-    ],
-    faq: [
-      {
-        question: "Is Hotel Management practical-based?",
-        answer: "Yes, we have a dedicated kitchen and restaurant setup for Hotel Management students to practice culinary and service skills."
-      },
-      {
-        question: "Can I study BCA after taking +2 Management?",
-        answer: "Yes, if you study Computer Science or Mathematics as an optional subject in +2 Management, you are eligible for BCA and other IT degrees."
-      },
-      {
-        question: "Does the college provide internships?",
-        answer: "We facilitate internships for Hotel Management students in reputed hotels. For business students, we organize industrial visits."
-      }
-    ]
-  },
-  {
-    id: 'csit',
-    title: 'BSc. CSIT',
-    level: 'Bachelor',
-    description: 'A practical IT course affiliatied with TU bridging the gap between industry needs and academic knowledge.',
-    duration: '4 Years (8 Semesters)',
-    image: 'https://picsum.photos/800/600?random=13',
-    overview: 'BSc. CSIT (Bachelor of Science in Computer Science and Information Technology) is a four-year course affiliated with Tribhuvan University. It is designed to provide the student with all sorts of knowledge in the field of Information Technology and Computing. The program involves a significant amount of project work and internships.',
-    eligibility: [
-      'Passed +2 Science or equivalent with C grade in all subjects',
-      'Must pass TU IOST Entrance Examination'
-    ],
-    feeStructure: 'Total Course Fee: NPR 4,50,000 (Approx). Paid on semester basis.',
-    syllabus: [
-      'C/C++ Programming',
-      'Digital Logic',
-      'Data Structures & Algorithms',
-      'Database Management Systems',
-      'Software Engineering',
-      'Artificial Intelligence',
-      'Computer Networks'
-    ],
-    syllabusPdf: '#csit-syllabus',
-    careerOpportunities: [
-      'Software Developer',
-      'Network Administrator',
-      'Database Analyst',
-      'AI/ML Engineer',
-      'Web Developer'
-    ],
-    faculty: [
-      { name: "Er. S. Shrestha", role: "Program Head", image: "https://picsum.photos/200/200?random=65" },
-      { name: "Mr. P. Khadka", role: "Senior Lecturer", image: "https://picsum.photos/200/200?random=66" }
-    ],
-    admissionRequirements: [
-      'Passed +2 Science',
-      'TU Entrance Score Card',
-      'Personal Interview'
-    ],
-    gallery: [
-      'https://picsum.photos/400/300?random=77',
-      'https://picsum.photos/400/300?random=78',
-      'https://picsum.photos/400/300?random=79'
-    ],
-    faq: [
-      {
-        question: "Is the CSIT program semester-based?",
-        answer: "Yes, BSc. CSIT is an 8-semester (4-year) program affiliated with Tribhuvan University."
-      },
-      {
-        question: "What is the difference between CSIT and BCA?",
-        answer: "CSIT is more focused on the core engineering and theoretical aspects of computer science along with programming, while BCA is more application-oriented. CSIT requires a Science background (+2 Science)."
-      },
-      {
-        question: "Are internships mandatory?",
-        answer: "Yes, students must complete an internship in the 7th semester and a major project in the 8th semester as part of the curriculum."
-      }
-    ]
-  },
-  {
-    id: 'bbs',
-    title: 'BBS (Bachelor of Business Studies)',
-    level: 'Bachelor',
-    description: 'An advanced undergraduate program providing deep insights into business management and finance.',
-    duration: '4 Years (Annual System)',
-    image: 'https://picsum.photos/800/600?random=12',
-    overview: 'The BBS program aims to develop students into competent managers for any sector of organized activity. The program is based on the principle that graduates will spend a major portion of their life in a constantly changing environment. The student should have an opportunity to obtain a broad knowledge of the concepts and reality-based skills underlying the operation and management of organizations.',
-    eligibility: [
-      'Passed +2 in Management or Science',
-      'Minimum D+ in all subjects'
-    ],
-    feeStructure: 'Total Course Fee: NPR 1,50,000 (Approx).',
-    syllabus: [
-      'Business English',
-      'Micro/Macro Economics',
-      'Cost and Management Accounting',
-      'Principles of Management',
-      'Human Resource Management',
-      'Finance'
-    ],
-    syllabusPdf: '#bbs-syllabus',
-    careerOpportunities: [
-      'Banking & Insurance',
-      'Civil Service',
-      'Corporate Management',
-      'Sales & Marketing',
-      'Financial Analyst'
-    ],
-    faculty: [
-      { name: "Dr. R. Pandey", role: "Department Head", image: "https://picsum.photos/200/200?random=67" }
-    ],
-    admissionRequirements: [
-      'Academic Transcripts of +2',
-      'CMAT Entrance (Optional/As per TU)',
-      'College Interview'
-    ],
-    gallery: [
-      'https://picsum.photos/400/300?random=80',
-      'https://picsum.photos/400/300?random=81'
-    ],
-    faq: [
-      {
-        question: "Is attendance mandatory for BBS?",
-        answer: "While BBS offers flexibility, we encourage regular attendance for better internal evaluation marks and academic performance."
-      },
-      {
-        question: "Can I work while studying BBS?",
-        answer: "Yes, since the classes are usually held in the morning shift (6:30 AM - 10:30 AM), students often work part-time jobs during the day."
-      }
-    ]
-  },
-  {
-    id: 'mbs',
-    title: 'MBS (Master of Business Studies)',
-    level: 'Master',
-    description: 'Master level program aimed at producing high-level management professionals and researchers.',
-    duration: '2 Years (4 Semesters)',
-    image: 'https://picsum.photos/800/600?random=16',
-    overview: 'The MBS program enables the students to work as competent managers and to meet the demand of higher-level managers in organizations, particularly in the functional areas of management. Upon graduation, a student should be able to function as a manager in business, industry, government and non-government sectors.',
-    eligibility: [
-      'Passed Bachelor degree (BBS, BBA, or equivalent) from recognized university',
-      'Must pass CMAT/Entrance conducted by TU'
-    ],
-    feeStructure: 'Total Course Fee: NPR 2,00,000 (Approx).',
-    syllabus: [
-      'Marketing Management',
-      'Financial Management',
-      'Organizational Behavior',
-      'Strategic Management',
-      'Research Methodology',
-      'Thesis Writing'
-    ],
-    syllabusPdf: '#mbs-syllabus',
-    careerOpportunities: [
-      'CEO / Top Level Management',
-      'Academic Researcher / Professor',
-      'Business Consultant',
-      'Policy Analyst',
-      'Entrepreneur'
-    ],
-    faculty: [
-      { name: "Prof. K. Acharya", role: "Program Director", image: "https://picsum.photos/200/200?random=68" }
-    ],
-    admissionRequirements: [
-      'Bachelor Degree Transcript',
-      'Entrance Score',
-      'Interview'
-    ],
-    gallery: [
-      'https://picsum.photos/400/300?random=82',
-      'https://picsum.photos/400/300?random=83'
-    ],
-    faq: [
-      {
-        question: "Is a thesis mandatory for MBS?",
-        answer: "Yes, completing a thesis in the final semester is mandatory for the completion of the degree."
-      },
-      {
-        question: "Do you have evening classes for MBS?",
-        answer: "Yes, we offer evening classes to accommodate working professionals who want to pursue their Master's degree."
-      }
-    ]
-  }
-];
+import { programs } from '../data/programsData';
 
 const Academics: React.FC = () => {
   const [selectedProgramId, setSelectedProgramId] = useState<string | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const selectedProgram = programs.find(p => p.id === selectedProgramId);
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash && programs.some(p => p.id === hash)) {
+      setSelectedProgramId(hash);
+      scrollToTop();
+    }
+  }, [location.hash]);
 
   if (selectedProgram) {
     return (
@@ -306,7 +30,11 @@ const Academics: React.FC = () => {
           <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 text-white">
             <div className="max-w-7xl mx-auto">
               <button 
-                onClick={() => { setSelectedProgramId(null); scrollToTop(); }}
+                onClick={() => { 
+                  setSelectedProgramId(null); 
+                  scrollToTop(); 
+                  navigate('/academics');
+                }}
                 className="flex items-center gap-2 text-gray-300 hover:text-white mb-6 transition-colors font-medium"
               >
                 <ChevronLeft size={20} /> Back to Programs

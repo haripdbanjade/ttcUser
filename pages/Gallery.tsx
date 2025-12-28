@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Image as ImageIcon, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const galleryImages = [
@@ -26,6 +27,21 @@ const Gallery: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 8;
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (hash) {
+      const categoryFromHash = categories.find(c => c.toLowerCase() === hash);
+      if (categoryFromHash) {
+        setActiveCategory(categoryFromHash);
+      }
+    } else {
+      setActiveCategory('All');
+    }
+  }, [location.hash]);
+
   const filteredImages = activeCategory === 'All' 
     ? galleryImages 
     : galleryImages.filter(img => img.category === activeCategory);
@@ -50,6 +66,14 @@ const Gallery: React.FC = () => {
     scrollToTop();
   };
 
+  const handleCategoryClick = (cat: string) => {
+    if (cat === 'All') {
+      navigate('/gallery');
+    } else {
+      navigate(`/gallery#${cat.toLowerCase()}`);
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen pb-20">
       <div className="bg-primary-900 py-20 text-center">
@@ -65,7 +89,7 @@ const Gallery: React.FC = () => {
           {categories.map(cat => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => handleCategoryClick(cat)}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
                 activeCategory === cat
                   ? 'bg-primary-600 text-white shadow-md'

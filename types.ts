@@ -2,6 +2,7 @@ export interface Program {
   id: string;
   title: string;
   level: 'Plus 2' | 'Bachelor' | 'Master';
+  affiliation: 'NEB' | 'PU';
   description: string;
   duration: string;
   image: string;

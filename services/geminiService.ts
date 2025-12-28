@@ -16,9 +16,8 @@ Key Information about Tilottama College:
 - Programs: 
   - +2 Science (Physics, Chemistry, Biology/Math)
   - +2 Management (Accountancy, Economics, Computer Science)
-  - BBS (Bachelor of Business Studies)
-  - BCA (Bachelor of Computer Application)
-  - BSc. CSIT
+  - BBA (Bachelor of Business Administration)
+  - MBA (Master of Business Administration)
 - Facilities: Modern Science Labs, Computer Labs, Library, Sports Ground, Transportation.
 - Admissions: Open annually around June/July immediately after SEE results. Entrance exam is required.
 

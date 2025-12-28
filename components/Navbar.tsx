@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, GraduationCap, Search, FileText, ChevronRight, Loader2, AlertCircle, CheckCircle, ChevronDown } from 'lucide-react';
+import { programs } from '../data/programsData';
 
 // Mock Search Data
 const searchIndex = [
   { title: 'Admissions', path: '/admissions', type: 'Page' },
-  { title: '+2 Science', path: '/academics', type: 'Program' },
-  { title: '+2 Management', path: '/academics', type: 'Program' },
-  { title: 'BSc. CSIT', path: '/academics', type: 'Program' },
-  { title: 'BBS', path: '/academics', type: 'Program' },
+  { title: '+2 Science', path: '/academics#science', type: 'Program' },
+  { title: '+2 Management', path: '/academics#management', type: 'Program' },
+  { title: 'BBA', path: '/academics#bba', type: 'Program' },
+  { title: 'MBA', path: '/academics#mba', type: 'Program' },
   { title: 'Scholarships', path: '/admissions', type: 'Info' },
   { title: 'Contact Us', path: '/contact', type: 'Page' },
   { title: 'Photo Gallery', path: '/gallery', type: 'Media' },
   { title: 'Downloads', path: '/downloads', type: 'Resources' },
   { title: 'News & Events', path: '/blog', type: 'Blog' },
 ];
+
+const nebPrograms = programs.filter(p => p.affiliation === 'NEB');
+const puPrograms = programs.filter(p => p.affiliation === 'PU');
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,9 +96,32 @@ export const Navbar: React.FC = () => {
         { label: 'Our Team', path: '/team' },
       ]
     },
-    { label: 'Academics', path: '/academics' },
-    { label: 'Admissions', path: '/admissions' },
-    { label: 'Gallery', path: '/gallery' },
+    { 
+      label: 'Academics', 
+      path: '/academics',
+      isMega: true, // Flag for special dropdown
+    },
+    { 
+      label: 'Admissions', 
+      path: '/admissions',
+      children: [
+        { label: 'Admission Overview', path: '/admissions' },
+        { label: 'NEB (+2) Process', path: '/admissions#neb' },
+        { label: 'PU (Bachelor/Master) Process', path: '/admissions#pu' },
+      ]
+    },
+    { 
+      label: 'Gallery', 
+      path: '/gallery',
+      children: [
+        { label: 'All Photos', path: '/gallery' },
+        { label: 'Campus Life', path: '/gallery#campus' },
+        { label: 'Labs & Facilities', path: '/gallery#labs' },
+        { label: 'Events & Fests', path: '/gallery#events' },
+        { label: 'Sports', path: '/gallery#sports' },
+        { label: 'Classrooms', path: '/gallery#classrooms' },
+      ]
+    },
     { label: 'Blog', path: '/blog' },
     { label: 'Contact', path: '/contact' },
   ];
@@ -102,6 +129,51 @@ export const Navbar: React.FC = () => {
   const isActive = (path: string) => {
     if (path === '/' && location.pathname !== '/') return false;
     return location.pathname.startsWith(path);
+  };
+
+  const AcademicDropdown = ({ isMobile = false }) => {
+    const handleLinkClick = (path: string) => {
+      navigate(path);
+      if (isMobile) setIsOpen(false);
+    };
+
+    const linkClass = (path: string) => `block w-full text-left px-4 py-3 text-sm hover:bg-primary-50 hover:text-primary-700 transition-colors ${
+      location.pathname + location.hash === path || (path === location.pathname && !location.hash)
+        ? 'bg-primary-50 text-primary-700 font-semibold' 
+        : 'text-gray-600'
+    }`;
+    
+    const mobileLinkClass = (path: string) => `block w-full text-left px-4 py-3 text-sm hover:bg-gray-100 border-l-2 ${
+      location.pathname + location.hash === path || (path === location.pathname && !location.hash)
+        ? 'text-primary-600 bg-gray-100 border-primary-500 font-semibold'
+        : 'text-gray-600 border-transparent hover:text-primary-600 hover:border-primary-400'
+    }`;
+
+    if (isMobile) {
+      return (
+        <div className="bg-gray-50 rounded-lg ml-3 mt-1 overflow-hidden">
+          <Link to="/academics" onClick={() => setIsOpen(false)} className={mobileLinkClass("/academics")}>All Programs</Link>
+          <div className="px-4 pt-3 pb-1 text-xs font-bold text-gray-400 uppercase tracking-wider">NEB Programs</div>
+          {nebPrograms.map(p => <button key={p.id} onClick={() => handleLinkClick(`/academics#${p.id}`)} className={mobileLinkClass(`/academics#${p.id}`)}>{p.title}</button>)}
+          <div className="px-4 pt-3 pb-1 text-xs font-bold text-gray-400 uppercase tracking-wider">PU Programs</div>
+          {puPrograms.map(p => <button key={p.id} onClick={() => handleLinkClick(`/academics#${p.id}`)} className={mobileLinkClass(`/academics#${p.id}`)}>{p.title}</button>)}
+        </div>
+      );
+    }
+    
+    return (
+      <div className="absolute left-0 mt-0 w-64 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
+        <Link to="/academics" className={linkClass("/academics")}>All Programs</Link>
+        <div className="border-t border-gray-100">
+          <div className="px-4 pt-3 pb-1 text-xs font-bold text-gray-400 uppercase tracking-wider">NEB Programs</div>
+          {nebPrograms.map(p => <Link key={p.id} to={`/academics#${p.id}`} className={linkClass(`/academics#${p.id}`)}>{p.title}</Link>)}
+        </div>
+        <div className="border-t border-gray-100">
+          <div className="px-4 pt-3 pb-1 text-xs font-bold text-gray-400 uppercase tracking-wider">PU Programs</div>
+          {puPrograms.map(p => <Link key={p.id} to={`/academics#${p.id}`} className={linkClass(`/academics#${p.id}`)}>{p.title}</Link>)}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -139,41 +211,26 @@ export const Navbar: React.FC = () => {
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
               {navLinks.map((link) => (
                 <div key={link.label} className="relative group">
-                  <div className="flex items-center">
-                    {link.children ? (
-                        <div
-                          className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 border-b-2 px-3 py-2 cursor-pointer ${
-                             link.children.some(c => location.pathname === c.path) || isActive(link.path)
-                              ? 'border-primary-600 text-primary-700'
-                              : 'border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-200'
-                          }`}
-                        >
-                            {link.label}
-                            <ChevronDown size={14} className="mt-0.5 group-hover:rotate-180 transition-transform duration-300" />
-                        </div>
-                    ) : (
-                        <Link
-                            to={link.path}
-                            className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 border-b-2 px-3 py-2 ${
-                            isActive(link.path)
-                                ? 'border-primary-600 text-primary-700'
-                                : 'border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-200'
-                            }`}
-                        >
-                            {link.label}
-                        </Link>
-                    )}
+                  <div className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 border-b-2 px-3 py-2 cursor-pointer ${
+                      isActive(link.path)
+                      ? 'border-primary-600 text-primary-700'
+                      : 'border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-200'
+                  }`}>
+                    <Link to={link.path}>{link.label}</Link>
+                    {(link.children || link.isMega) && <ChevronDown size={14} className="mt-0.5 group-hover:rotate-180 transition-transform duration-300" />}
                   </div>
                   
                   {/* Dropdown Menu */}
-                  {link.children && (
-                    <div className="absolute left-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
+                  {link.children && !link.isMega && (
+                    <div className="absolute left-0 mt-0 w-56 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
                       {link.children.map((child) => (
                         <Link
                           key={child.label}
                           to={child.path}
                           className={`block w-full text-left px-4 py-3 text-sm hover:bg-primary-50 hover:text-primary-700 transition-colors ${
-                            location.pathname === child.path ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-gray-600'
+                            location.pathname + location.hash === child.path || (child.path === location.pathname && !location.hash)
+                              ? 'bg-primary-50 text-primary-700 font-semibold' 
+                              : 'text-gray-600'
                           }`}
                         >
                           {child.label}
@@ -181,6 +238,8 @@ export const Navbar: React.FC = () => {
                       ))}
                     </div>
                   )}
+
+                  {link.isMega && <AcademicDropdown />}
                 </div>
               ))}
 
@@ -240,7 +299,7 @@ export const Navbar: React.FC = () => {
                 <div key={link.label}>
                   <button
                     onClick={() => {
-                      if (link.children) {
+                      if (link.children || link.isMega) {
                         setMobileSubmenuOpen(mobileSubmenuOpen === link.label ? null : link.label);
                       } else {
                         navigate(link.path);
@@ -254,7 +313,7 @@ export const Navbar: React.FC = () => {
                     }`}
                   >
                     {link.label}
-                    {link.children && (
+                    {(link.children || link.isMega) && (
                       <ChevronDown 
                         size={16} 
                         className={`transition-transform duration-200 ${mobileSubmenuOpen === link.label ? 'rotate-180' : ''}`} 
@@ -263,7 +322,7 @@ export const Navbar: React.FC = () => {
                   </button>
                   
                   {/* Mobile Submenu */}
-                  {link.children && mobileSubmenuOpen === link.label && (
+                  {link.children && !link.isMega && mobileSubmenuOpen === link.label && (
                     <div className="bg-gray-50 rounded-lg ml-3 mt-1 overflow-hidden">
                       {link.children.map((child) => (
                         <button
@@ -272,13 +331,18 @@ export const Navbar: React.FC = () => {
                             navigate(child.path);
                             setIsOpen(false);
                           }}
-                          className={`block w-full text-left px-4 py-3 text-sm text-gray-600 hover:text-primary-600 hover:bg-gray-100 border-l-2 border-transparent hover:border-primary-400`}
+                          className={`block w-full text-left px-4 py-3 text-sm hover:bg-gray-100 border-l-2 ${
+                            location.pathname + location.hash === child.path || (child.path === location.pathname && !location.hash)
+                              ? 'text-primary-600 bg-gray-100 border-primary-500 font-semibold'
+                              : 'text-gray-600 border-transparent hover:text-primary-600 hover:border-primary-400'
+                          }`}
                         >
                           {child.label}
                         </button>
                       ))}
                     </div>
                   )}
+                  {link.isMega && mobileSubmenuOpen === link.label && <AcademicDropdown isMobile={true} />}
                 </div>
               ))}
                <button 

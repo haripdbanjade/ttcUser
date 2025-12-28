@@ -27,7 +27,7 @@ const heroSlides = [
 const notices = [
   { date: "15 July", title: "Class 11 Entrance Results Published" },
   { date: "12 July", title: "Important Notice for Grade 12 Board Exams" },
-  { date: "10 July", title: "Admissions Open for BBS & BCA Programs" },
+  { date: "10 July", title: "Admissions Open for BBA & MBA Programs" },
   { date: "05 July", title: "Scholarship Application Deadline Extended" }
 ];
 
@@ -40,12 +40,14 @@ const events = [
 const featuredPrograms = [
   { title: "+2 Science", desc: "Physics, Chemistry, Biology/Math", icon: "🧬" },
   { title: "+2 Management", desc: "Computer Science, Hotel Management", icon: "📊" },
-  { title: "BSc. CSIT", desc: "IT & Software Engineering", icon: "💻" }
+  { title: "BBA", desc: "Business Administration & Leadership", icon: "📈" }
 ];
 
 const testimonials = [
   { name: "Aarav Sharma", role: "Alumni, Batch 2020", text: "Tilottama gave me the foundation I needed to crack the IOE entrance. The faculty is incredibly supportive." },
-  { name: "Priya Karki", role: "Grade 12 Student", text: "Beyond academics, the extracurricular activities here helped me build confidence and leadership skills." }
+  { name: "Priya Karki", role: "Grade 12 Student", text: "Beyond academics, the extracurricular activities here helped me build confidence and leadership skills." },
+  { name: "Suman Thapa", role: "BBA Student, Batch 2022", text: "The BBA program is fantastic. We have regular case study competitions and the teachers really help us bridge the gap between theory and industry needs." },
+  { name: "Binod Chaudhary", role: "Alumni, BBA Batch 2018", text: "The faculty is top-notch. The practical, project-based approach in BBA helped me understand real-world business dynamics effectively." }
 ];
 
 const awards = [
