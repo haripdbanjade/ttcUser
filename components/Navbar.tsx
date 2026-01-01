@@ -20,6 +20,13 @@ const searchIndex = [
 const nebPrograms = programs.filter(p => p.affiliation === 'NEB');
 const puPrograms = programs.filter(p => p.affiliation === 'PU');
 
+const yearOptions: { [key: string]: string[] } = {
+  '+2 Science': ['Class 11', 'Class 12'],
+  '+2 Management': ['Class 11', 'Class 12'],
+  'BBA': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
+  'MBA': ['1st Year', '2nd Year'],
+};
+
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +43,7 @@ export const Navbar: React.FC = () => {
   // Result Checker States
   const [symbolNo, setSymbolNo] = useState('');
   const [dob, setDob] = useState('');
-  const [batch, setBatch] = useState('');
+  const [program, setProgram] = useState('');
   const [year, setYear] = useState('');
   const [checkingResult, setCheckingResult] = useState(false);
   const [resultData, setResultData] = useState<any>(null);
@@ -67,7 +74,7 @@ export const Navbar: React.FC = () => {
       const isPass = parseInt(symbolNo) % 2 === 0;
       setResultData({
         symbolNo,
-        batch,
+        program,
         year,
         studentName: "Student Name (Mock)",
         gpa: isPass ? "3.65" : "N/A",
@@ -81,7 +88,7 @@ export const Navbar: React.FC = () => {
     setResultData(null);
     setSymbolNo('');
     setDob('');
-    setBatch('');
+    setProgram('');
     setYear('');
   };
 
@@ -442,39 +449,39 @@ export const Navbar: React.FC = () => {
              <div className="p-8">
                {!resultData ? (
                  <form onSubmit={handleCheckResult} className="space-y-4">
-                   <div className="grid grid-cols-2 gap-4">
-                     <div>
-                       <label className="block text-sm font-medium text-gray-700 mb-1">Batch</label>
-                       <select 
-                          required
-                          value={batch}
-                          onChange={(e) => setBatch(e.target.value)}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none bg-white"
-                       >
-                         <option value="">Select Batch</option>
-                         <option value="2081">2081</option>
-                         <option value="2080">2080</option>
-                         <option value="2079">2079</option>
-                         <option value="2078">2078</option>
-                       </select>
-                     </div>
-                     <div>
-                       <label className="block text-sm font-medium text-gray-700 mb-1">Year/Level</label>
-                        <select 
-                          required
-                          value={year}
-                          onChange={(e) => setYear(e.target.value)}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none bg-white"
-                       >
-                         <option value="">Select Level</option>
-                         <option value="Class 11">Class 11</option>
-                         <option value="Class 12">Class 12</option>
-                         <option value="1st Year">1st Year</option>
-                         <option value="2nd Year">2nd Year</option>
-                         <option value="3rd Year">3rd Year</option>
-                         <option value="4th Year">4th Year</option>
-                       </select>
-                     </div>
+                   <div>
+                     <label className="block text-sm font-medium text-gray-700 mb-1">Program</label>
+                     <select 
+                        required
+                        value={program}
+                        onChange={(e) => {
+                          setProgram(e.target.value);
+                          setYear(''); // Reset year when program changes
+                        }}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none bg-white"
+                     >
+                       <option value="">Select Program</option>
+                       <option value="+2 Science">+2 Science</option>
+                       <option value="+2 Management">+2 Management</option>
+                       <option value="BBA">BBA</option>
+                       <option value="MBA">MBA</option>
+                     </select>
+                   </div>
+
+                   <div>
+                     <label className="block text-sm font-medium text-gray-700 mb-1">Year / Level</label>
+                      <select 
+                        required
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
+                        disabled={!program}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none bg-white disabled:bg-gray-100"
+                     >
+                       <option value="">Select Year</option>
+                       {program && yearOptions[program]?.map(y => (
+                          <option key={y} value={y}>{y}</option>
+                       ))}
+                     </select>
                    </div>
 
                    <div>
@@ -517,8 +524,8 @@ export const Navbar: React.FC = () => {
                    
                    <div className="bg-gray-50 rounded-lg p-4 text-left space-y-2 border border-gray-100">
                      <div className="flex justify-between border-b border-gray-200 pb-2">
-                       <span className="text-gray-500">Academic Year</span>
-                       <span className="font-bold text-xs bg-primary-100 text-primary-700 px-2 py-0.5 rounded">{resultData.batch} - {resultData.year}</span>
+                       <span className="text-gray-500">Program</span>
+                       <span className="font-bold text-xs bg-primary-100 text-primary-700 px-2 py-0.5 rounded">{resultData.program} - {resultData.year}</span>
                      </div>
                      <div className="flex justify-between border-b border-gray-200 pb-2">
                        <span className="text-gray-500">Symbol No</span>

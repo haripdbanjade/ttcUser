@@ -29,9 +29,9 @@ const About: React.FC = () => {
       image: "https://picsum.photos/400/400?random=52"
     },
     {
-      name: "Mr. Bishnu Thapa",
-      role: "CSIT Coordinator",
-      qualification: "M.Sc. IT",
+      name: "Parbin Gyawali",
+      role: "MBA COORDINATOR",
+      qualification: "MBA",
       image: "https://picsum.photos/400/400?random=53"
     }
   ];
@@ -39,8 +39,8 @@ const About: React.FC = () => {
   const milestones = [
     { year: "1996", title: "Establishment", desc: "Founded with a vision to provide quality higher education in Rupandehi." },
     { year: "2000", title: "Expansion", desc: "Introduced Science stream at +2 level with modern laboratories." },
-    { year: "2008", title: "Bachelor Programs", desc: "Started BBS program affiliated with Tribhuvan University." },
-    { year: "2015", title: "IT Excellence", desc: "Launched BSc. CSIT program to cater to the growing IT industry demand." },
+    { year: "2008", title: "Bachelor Programs", desc: "Started Bachelor of Business Studies (BBS) program." },
+    { year: "2015", title: "MBA Program", desc: "Launched the Master of Business Administration program to shape future business leaders." },
     { year: "2023", title: "Best College Award", desc: "Recognized as the best college in the province for academic results." }
   ];
 
@@ -58,13 +58,6 @@ const About: React.FC = () => {
       description: "Received Quality Assurance and Accreditation from the University Grants Commission (UGC), Nepal.",
       icon: Award,
       color: "bg-blue-100 text-blue-600"
-    },
-    {
-      title: "National IT Excellence",
-      year: "2021",
-      description: "Recognized for best infrastructure and placement record in the BSc. CSIT program.",
-      icon: Star,
-      color: "bg-purple-100 text-purple-600"
     },
     {
       title: "Sports Champions",
@@ -92,7 +85,7 @@ const About: React.FC = () => {
     },
     {
       title: "Outstanding Results",
-      description: "Consistently achieving top ranks in NEB and TU board examinations with a 98% pass rate.",
+      description: "Consistently achieving top ranks in NEB board examinations with a 98% pass rate.",
       icon: Trophy,
       color: "text-amber-600 bg-amber-50"
     },
@@ -150,8 +143,7 @@ const About: React.FC = () => {
               <h2 className="text-3xl font-bold text-gray-900 font-serif">A Center of Academic Excellence</h2>
               <p className="text-gray-600 leading-relaxed text-lg">
                 Tilottama College, established in 1996, stands as a beacon of quality education in Western Nepal. Affiliated with the 
-                <span className="font-semibold text-primary-700"> National Examination Board (NEB)</span> for +2 programs, and both 
-                <span className="font-semibold text-primary-700"> Tribhuvan University (TU)</span> and 
+                <span className="font-semibold text-primary-700"> National Examination Board (NEB)</span> for +2 programs, and 
                 <span className="font-semibold text-primary-700"> Pokhara University (PU)</span> for higher education programs, 
                 we are dedicated to producing competent professionals.
               </p>
@@ -190,10 +182,6 @@ const About: React.FC = () => {
                <div className="text-center group">
                   <div className="h-16 flex items-center justify-center font-black text-3xl text-red-600 mb-2">NEB</div>
                   <span className="text-xs font-bold text-gray-500 group-hover:text-red-600">National Exam Board</span>
-               </div>
-               <div className="text-center group">
-                  <div className="h-16 flex items-center justify-center font-black text-3xl text-blue-800 mb-2">TU</div>
-                  <span className="text-xs font-bold text-gray-500 group-hover:text-blue-800">Tribhuvan University</span>
                </div>
                <div className="text-center group">
                   <div className="h-16 flex items-center justify-center font-black text-3xl text-purple-800 mb-2">PU</div>

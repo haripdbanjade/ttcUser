@@ -39,15 +39,6 @@ const blogPosts = [
     image: "https://picsum.photos/800/400?random=204"
   },
   {
-    id: 5,
-    title: "Guest Lecture on AI & Future Technologies",
-    excerpt: "Renowned IT experts visited the campus to interact with BSc. CSIT students about the emerging trends in Artificial Intelligence.",
-    date: "January 25, 2024",
-    author: "CSIT Dept",
-    category: "Technology",
-    image: "https://picsum.photos/800/400?random=205"
-  },
-  {
     id: 6,
     title: "Farewell 2079 Batch",
     excerpt: "Emotional moments as we bid farewell to our graduating batch. We wish them all the best for their future endeavors.",

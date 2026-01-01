@@ -51,15 +51,6 @@ const downloadItems: DownloadItem[] = [
     icon: BookOpen
   },
   {
-    id: '5',
-    title: 'BSc. CSIT Entrance Syllabus',
-    description: 'Topic-wise weightage and syllabus for TU Entrance Exam.',
-    category: 'Syllabus',
-    date: 'March 20, 2024',
-    size: '0.8 MB',
-    icon: BookOpen
-  },
-  {
     id: '6',
     title: 'First Terminal Exam Routine',
     description: 'Schedule for Grade 11 and 12 internal examinations.',

@@ -76,13 +76,13 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="https://tuexam.edu.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
-                  <ExternalLink size={14} /> TU Exam Result
+                <a href="https://pu.edu.np/notice/exam/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
+                  <ExternalLink size={14} /> PU Exam Result
                 </a>
               </li>
               <li>
-                <a href="https://tu.edu.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
-                  <ExternalLink size={14} /> Tribhuvan University (TU)
+                <a href="https://pu.edu.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
+                  <ExternalLink size={14} /> Pokhara University (PU)
                 </a>
               </li>
               <li>

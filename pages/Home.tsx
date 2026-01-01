@@ -18,9 +18,9 @@ const heroSlides = [
     subtitle: "Modern Science & Computer Labs"
   },
   {
-    image: "https://picsum.photos/1920/1080?random=3",
-    title: "Holistic Development",
-    subtitle: "Sports, Arts, and Leadership Programs"
+    image: "https://picsum.photos/1920/1080?random=4",
+    title: "Admissions Open 2026",
+    subtitle: "Join the next generation of leaders and innovators."
   }
 ];
 
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
             <div className="absolute inset-0 flex items-center justify-center text-center px-4">
               <div className="max-w-4xl space-y-4">
                 <span className="inline-block py-1 px-3 rounded-full bg-primary-500/80 text-white text-xs md:text-sm font-semibold tracking-wider uppercase mb-2">
-                  Admissions Open 2024
+                  Admissions Open 2026
                 </span>
                 <h1 className="text-4xl md:text-6xl font-bold text-white font-serif leading-tight drop-shadow-lg">
                   {slide.title}
@@ -202,14 +202,6 @@ const Home: React.FC = () => {
                  <span className="text-xs font-bold text-gray-500 uppercase group-hover:text-red-600 transition-colors">National Exam Board</span>
               </div>
 
-              {/* TU */}
-              <div className="group flex flex-col items-center gap-3 cursor-pointer">
-                 <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center border-2 border-transparent group-hover:border-blue-600 group-hover:bg-blue-50 transition-all">
-                    <span className="text-2xl font-black text-gray-700 group-hover:text-blue-800 transition-colors">TU</span>
-                 </div>
-                 <span className="text-xs font-bold text-gray-500 uppercase group-hover:text-blue-800 transition-colors">Tribhuvan University</span>
-              </div>
-
                {/* PU */}
                <div className="group flex flex-col items-center gap-3 cursor-pointer">
                  <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center border-2 border-transparent group-hover:border-purple-600 group-hover:bg-purple-50 transition-all">
@@ -244,7 +236,7 @@ const Home: React.FC = () => {
                  <Trophy size={32} />
                </div>
                <h3 className="text-xl font-bold mb-3">Top Results</h3>
-               <p className="text-gray-600">Consistently producing board toppers and excellent results in NEB and TU examinations.</p>
+               <p className="text-gray-600">Consistently producing board toppers and excellent results in NEB examinations.</p>
              </div>
              <div className="text-center p-8 rounded-2xl bg-gray-50 hover:shadow-xl transition-shadow border border-gray-100 group">
                <div className="w-16 h-16 mx-auto bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6 group-hover:bg-green-600 group-hover:text-white transition-colors">

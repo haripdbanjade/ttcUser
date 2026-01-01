@@ -27,12 +27,7 @@ const teamData: TeamMember[] = [
   { id: '8', name: "Mrs. A. Tuladhar", role: "Lecturer - Accountancy", qualification: "MBS", image: "https://picsum.photos/400/400?random=64", category: 'management' },
   { id: '9', name: "Dr. Rita Pandey", role: "Senior Lecturer - Economics", qualification: "Ph.D. Economics", image: "https://picsum.photos/400/400?random=67", category: 'management' },
   { id: '9b', name: "Mr. S.R. Khanal", role: "Lecturer - Business Studies", qualification: "MBA", image: "https://picsum.photos/400/400?random=92", category: 'management' },
-
-  // CSIT Faculty
-  { id: '10', name: "Er. Sandeep Shrestha", role: "CSIT Program Head", qualification: "B.E. Computer", image: "https://picsum.photos/400/400?random=65", category: 'csit' },
-  { id: '11', name: "Mr. Prakash Khadka", role: "Senior Lecturer", qualification: "M.Sc. CSIT", image: "https://picsum.photos/400/400?random=66", category: 'csit' },
-  { id: '12', name: "Mr. Bishnu Thapa", role: "IT Coordinator", qualification: "M.Sc. IT", image: "https://picsum.photos/400/400?random=53", category: 'csit' },
-  { id: '12b', name: "Er. R.K. Jha", role: "Lecturer - Digital Logic", qualification: "B.E. Electronics", image: "https://picsum.photos/400/400?random=93", category: 'csit' },
+  { id: '12', name: "Parbin Gyawali", role: "MBA COORDINATOR", qualification: "MBA", image: "https://picsum.photos/400/400?random=53", category: 'management' },
 
   // Administration
   { id: '13', name: "Mr. Rajan K.C.", role: "Exam Controller", qualification: "MBS", image: "https://picsum.photos/400/400?random=58", category: 'admin' },
@@ -45,7 +40,6 @@ const tabs = [
   { id: 'leadership', label: 'Leadership', icon: GraduationCap },
   { id: 'science', label: 'Science Faculty', icon: Beaker },
   { id: 'management', label: 'Management Faculty', icon: Briefcase },
-  { id: 'csit', label: 'CSIT / IT Faculty', icon: Monitor },
   { id: 'admin', label: 'Administration', icon: Layout },
 ];
 

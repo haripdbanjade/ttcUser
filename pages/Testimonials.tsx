@@ -22,15 +22,6 @@ const testimonials = [
     text: "Beyond academics, the extracurricular activities here helped me build confidence and leadership skills. The science labs are modern and we get plenty of practical exposure."
   },
   {
-    id: 3,
-    name: "Suman Thapa",
-    role: "Student",
-    course: "BSc. CSIT",
-    batch: "2022",
-    image: "https://i.pravatar.cc/150?u=30",
-    text: "The CSIT department is fantastic. We have regular coding workshops and the teachers really help us bridge the gap between theory and industry needs."
-  },
-  {
     id: 4,
     name: "Dr. Rita Pandey",
     role: "Parent",
@@ -56,15 +47,6 @@ const testimonials = [
     batch: "2019",
     image: "https://i.pravatar.cc/150?u=60",
     text: "I owe my success in the medical entrance exam to the rigorous coaching and guidance I received during my +2 Science years at Tilottama."
-  },
-  {
-    id: 7,
-    name: "Kiran Desai",
-    role: "Student",
-    course: "BSc. CSIT",
-    batch: "2023",
-    image: "https://i.pravatar.cc/150?u=70",
-    text: "The infrastructure for IT students is excellent. High-speed internet and advanced labs make learning programming really fun."
   },
   {
     id: 8,
