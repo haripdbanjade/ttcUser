@@ -114,7 +114,7 @@ const Gallery: React.FC = () => {
                   <img 
                     src={img.src} 
                     alt={img.title} 
-                    loading={index < 8 ? "eager" : "lazy"}
+                    loading={currentPage === 1 && index < 4 ? 'eager' : 'lazy'}
                     decoding="async"
                     className="w-full h-auto transform group-hover:scale-110 transition-transform duration-700 block" 
                   />

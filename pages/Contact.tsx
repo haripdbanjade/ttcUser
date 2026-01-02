@@ -258,7 +258,7 @@ const Contact: React.FC = () => {
 
               <button 
                 type="submit"
-                className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5"
               >
                 {submitted ? 'Message Sent!' : <><Send size={18} /> Send Message</>}
               </button>

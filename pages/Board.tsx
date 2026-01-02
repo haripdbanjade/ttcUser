@@ -48,7 +48,7 @@ const Board: React.FC = () => {
 
              {/* Other Members */}
              {boardMembers.slice(1).map((member, idx) => (
-               <div key={idx} className="bg-white rounded-lg border border-gray-200 p-6 flex items-start gap-4 hover:border-primary-300 hover:shadow-md transition-all">
+               <div key={idx} className="bg-white rounded-lg border border-gray-200 p-6 flex items-start gap-4 hover:border-primary-300 hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
                   <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center flex-shrink-0">
                      <Users size={20} className="text-gray-500" />
                   </div>

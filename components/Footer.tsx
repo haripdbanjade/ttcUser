@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, GraduationCap, ExternalLink, Phone, Mail, MapPin, Send, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  setShowResultModal: (show: boolean) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ setShowResultModal }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -47,10 +51,15 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="flex space-x-4">
-              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"><Facebook size={18} /></a>
-              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"><Twitter size={18} /></a>
-              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"><Instagram size={18} /></a>
-              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-colors"><Linkedin size={18} /></a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-all duration-300"><Facebook size={18} /></a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-all duration-300"><Twitter size={18} /></a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-all duration-300"><Instagram size={18} /></a>
+              <a href="#" className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-primary-600 hover:text-white transition-all duration-300"><Linkedin size={18} /></a>
+            </div>
+
+            <div className="mt-8">
+                <h4 className="text-green-400 font-bold text-sm">ISO 9001:2015 Certified</h4>
+                <p className="text-xs text-gray-400">Quality Management System</p>
             </div>
           </div>
           
@@ -60,12 +69,13 @@ const Footer: React.FC = () => {
               <span className="w-8 h-[2px] bg-primary-500"></span> Explore
             </h3>
             <ul className="space-y-3 text-sm">
-              <li><Link to="/about" className="hover:text-primary-400 transition-colors flex items-center gap-2">About Us</Link></li>
-              <li><Link to="/academics" className="hover:text-primary-400 transition-colors flex items-center gap-2">Academics</Link></li>
-              <li><Link to="/gallery" className="hover:text-primary-400 transition-colors flex items-center gap-2">Photo Gallery</Link></li>
-              <li><Link to="/blog" className="hover:text-primary-400 transition-colors flex items-center gap-2">News & Events</Link></li>
-              <li><Link to="/testimonials" className="hover:text-primary-400 transition-colors flex items-center gap-2">Testimonials</Link></li>
-              <li><Link to="/downloads" className="hover:text-primary-400 transition-colors flex items-center gap-2">Downloads</Link></li>
+              <li><Link to="/scholarships" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">Scholarships</Link></li>
+              <li><Link to="/blog" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">News & Events</Link></li>
+              <li><Link to="/tour" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">Virtual Tour</Link></li>
+              <li><Link to="/careers" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">Careers</Link></li>
+              <li><Link to="/testimonials" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">Testimonials</Link></li>
+              <li><Link to="/downloads" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">Downloads</Link></li>
+              <li><button onClick={() => setShowResultModal(true)} className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1 w-full text-left">Check Results</button></li>
             </ul>
           </div>
 
@@ -76,22 +86,22 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="https://pu.edu.np/notice/exam/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
+                <a href="https://pu.edu.np/notice/exam/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">
                   <ExternalLink size={14} /> PU Exam Result
                 </a>
               </li>
               <li>
-                <a href="https://pu.edu.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
+                <a href="https://pu.edu.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">
                   <ExternalLink size={14} /> Pokhara University (PU)
                 </a>
               </li>
               <li>
-                <a href="https://www.neb.gov.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
+                <a href="https://www.neb.gov.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">
                   <ExternalLink size={14} /> National Exam Board (NEB)
                 </a>
               </li>
               <li>
-                <a href="https://moe.gov.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-colors flex items-center gap-2">
+                <a href="https://moe.gov.np/" target="_blank" rel="noopener noreferrer" className="hover:text-primary-400 transition-all duration-300 flex items-center gap-2 hover:translate-x-1">
                   <ExternalLink size={14} /> Ministry of Education
                 </a>
               </li>
@@ -143,9 +153,9 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
           <p>&copy; {new Date().getFullYear()} Tilottama Campus. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-gray-300">Privacy Policy</a>
-            <a href="#" className="hover:text-gray-300">Terms of Service</a>
-            <a href="#" className="hover:text-gray-300">Sitemap</a>
+            <Link to="/privacy" className="hover:text-gray-300">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-gray-300">Terms of Service</Link>
+            <Link to="/sitemap" className="hover:text-gray-300">Sitemap</Link>
           </div>
         </div>
       </div>

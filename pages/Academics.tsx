@@ -154,39 +154,49 @@ const Academics: React.FC = () => {
 
             {/* Sidebar Column */}
             <div className="space-y-8">
-              {/* Eligibility Box */}
-              <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 sticky top-24">
-                <h3 className="font-bold text-gray-900 mb-4 text-lg">Eligibility & Admission</h3>
-                <ul className="space-y-3 mb-6">
-                  {selectedProgram.eligibility.map((req, idx) => (
-                    <li key={idx} className="text-sm text-gray-600 flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary-500 mt-1.5 shrink-0"></div>
-                      {req}
-                    </li>
-                  ))}
-                </ul>
-                
-                <h4 className="font-bold text-gray-900 mb-2 text-sm uppercase tracking-wide">Documents Required</h4>
-                 <ul className="space-y-2 mb-6">
-                  {selectedProgram.admissionRequirements.map((req, idx) => (
-                    <li key={idx} className="text-xs text-gray-500 flex items-start gap-2">
-                      <CheckCircle size={12} className="text-primary-400 mt-0.5" />
-                      {req}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="bg-primary-50 p-4 rounded-lg mb-6">
-                  <div className="flex items-center gap-2 text-primary-800 font-bold mb-1">
-                    <DollarSign size={18} /> Fee Structure
+              <div className="sticky top-24 space-y-8">
+                {/* Eligibility Box */}
+                <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="font-bold text-gray-900 text-lg">Eligibility & Admission</h3>
+                    <span className="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full whitespace-nowrap">ISO Certified</span>
                   </div>
-                  <p className="text-sm text-primary-700 leading-snug">{selectedProgram.feeStructure}</p>
+                  <ul className="space-y-3 mb-6">
+                    {selectedProgram.eligibility.map((req, idx) => (
+                      <li key={idx} className="text-sm text-gray-600 flex items-start gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary-500 mt-1.5 shrink-0"></div>
+                        {req}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <h4 className="font-bold text-gray-900 mb-2 text-sm uppercase tracking-wide">Documents Required</h4>
+                  <ul className="space-y-2 mb-6">
+                    {selectedProgram.admissionRequirements.map((req, idx) => (
+                      <li key={idx} className="text-xs text-gray-500 flex items-start gap-2">
+                        <CheckCircle size={12} className="text-primary-400 mt-0.5" />
+                        {req}
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <button className="w-full bg-primary-600 text-white py-3 rounded-lg font-bold hover:bg-primary-700 transition-colors shadow-md mt-6 transform hover:-translate-y-0.5">
+                    Apply for Admission
+                  </button>
+                  <p className="text-xs text-center text-gray-400 mt-3">Seats are limited. Entrance exam mandatory.</p>
                 </div>
 
-                <button className="w-full bg-primary-600 text-white py-3 rounded-lg font-bold hover:bg-primary-700 transition-colors shadow-md">
-                  Apply for Admission
-                </button>
-                <p className="text-xs text-center text-gray-400 mt-3">Seats are limited. Entrance exam mandatory.</p>
+                {/* Scholarships Box */}
+                <div className="bg-white rounded-xl shadow-lg border border-gray-100 p-6">
+                  <h3 className="font-bold text-gray-900 mb-3 text-lg flex items-center gap-2"><Award className="text-amber-500" /> Scholarships Available</h3>
+                  <p className="text-sm text-gray-600 mb-4">
+                      Students in the {selectedProgram.title} program are eligible for various merit-based and talent scholarships.
+                  </p>
+                  <button onClick={() => navigate('/scholarships')} className="w-full bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors py-2.5 rounded-lg font-bold text-sm">
+                      Learn More
+                  </button>
+                </div>
+
               </div>
             </div>
 
@@ -221,7 +231,7 @@ const Academics: React.FC = () => {
             <div 
               key={program.id} 
               onClick={() => { setSelectedProgramId(program.id); scrollToTop(); }}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full border border-gray-100 cursor-pointer"
+              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full border border-gray-100 cursor-pointer transform hover:-translate-y-1"
             >
               <div className="relative h-56 overflow-hidden">
                 <img 
@@ -277,7 +287,7 @@ const Academics: React.FC = () => {
                { icon: Award, title: "Scholarships", desc: "Merit-based scholarships for deserving students." },
                { icon: Users, title: "Expert Faculty", desc: "Learn from experienced professors and industry experts." }
              ].map((item, idx) => (
-               <div key={idx} className="p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-primary-100 hover:bg-primary-50 transition-colors">
+               <div key={idx} className="p-6 bg-white rounded-xl border border-gray-100 shadow-sm hover:border-primary-100 hover:bg-primary-50 transition-all duration-300 transform hover:-translate-y-1">
                  <item.icon className="w-8 h-8 text-primary-600 mb-4" />
                  <h4 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h4>
                  <p className="text-gray-600 text-sm">{item.desc}</p>

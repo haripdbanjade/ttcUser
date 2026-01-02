@@ -15,14 +15,14 @@ export const programs: Program[] = [
       'Minimum C+ grade in Science and Mathematics',
       'Minimum D+ grade in English, Nepali, and Social Studies'
     ],
-    feeStructure: 'Approx. NPR 60,000 per year (excluding admission and exam fees). Merit-based scholarships available.',
+    feeStructure: 'Please contact the administration for detailed fee structure.',
     syllabus: [
-      'Physics (Mechanics, Thermodynamics, Electricity)',
-      'Chemistry (Physical, Organic, Inorganic)',
-      'Biology (Botany, Zoology) OR Mathematics',
+      'Physics',
+      'Chemistry',
+      'Mathematics (Compulsory)',
       'English',
       'Nepali',
-      'Computer Science (Optional)'
+      'Optional Group: Biology or Computer Science'
     ],
     syllabusPdf: '#science-syllabus',
     careerOpportunities: [
@@ -46,8 +46,8 @@ export const programs: Program[] = [
     gallery: [
       'https://picsum.photos/400/300?random=70',
       'https://picsum.photos/400/300?random=71',
-      'httpsum.photos/400/300?random=72',
-      'httpsum.photos/400/300?random=73'
+      'https://picsum.photos/400/300?random=72',
+      'https://picsum.photos/400/300?random=73'
     ],
     faq: [
       {
@@ -59,8 +59,8 @@ export const programs: Program[] = [
         answer: "Yes, we integrate entrance preparation classes into our regular schedule, taught by experienced instructors."
       },
       {
-        question: "Can I choose both Biology and Mathematics?",
-        answer: "Yes, students can opt for Extra Math along with Biology to keep both Medical and Engineering options open."
+        question: "Can I choose both Biology and Computer Science?",
+        answer: "Students must choose one optional group, either Biology or Computer Science, alongside the compulsory subjects."
       }
     ]
   },
@@ -72,20 +72,20 @@ export const programs: Program[] = [
     description: 'Comprehensive business education focusing on Accountancy, Economics, and Computer Science.',
     duration: '2 Years (Class 11 & 12)',
     image: 'https://picsum.photos/800/600?random=11',
-    overview: 'Our Management stream aims to produce capable mid-level human resources in the field of business and administration. Students learn the principles of accounting, economics, and business studies, along with practical skills in computer applications. We organize regular field visits and industrial tours.',
+    overview: 'Our Management stream aims to produce capable mid-level human resources in the field of business and administration. Students learn the principles of accounting, economics, and business studies, along with practical skills in their chosen specialization. We organize regular field visits and industrial tours.',
     eligibility: [
       'Passed SEE with minimum GPA 2.4',
       'Minimum D+ grade in all subjects',
       'Interest in business and commerce'
     ],
-    feeStructure: 'Approx. NPR 45,000 per year. Various scholarship schemes available for deserving students.',
+    feeStructure: 'Please contact the administration for detailed fee structure.',
     syllabus: [
       'Accountancy',
       'Economics',
       'Business Studies',
-      'Social Studies',
       'English & Nepali',
-      'Computer Science / Hotel Management'
+      'Social Studies',
+      'Specialization (Choose one): Hotel Management (H.M.), Finance, or Computer Science'
     ],
     syllabusPdf: '#management-syllabus',
     careerOpportunities: [
@@ -107,7 +107,7 @@ export const programs: Program[] = [
     gallery: [
       'https://picsum.photos/400/300?random=74',
       'https://picsum.photos/400/300?random=75',
-      'httpsum.photos/400/300?random=76'
+      'https://picsum.photos/400/300?random=76'
     ],
     faq: [
       {
@@ -116,7 +116,7 @@ export const programs: Program[] = [
       },
       {
         question: "Can I study BCA after taking +2 Management?",
-        answer: "Yes, if you study Computer Science or Mathematics as an optional subject in +2 Management, you are eligible for BCA and other IT degrees."
+        answer: "Yes, if you study Computer Science as your specialization in +2 Management, you are eligible for BCA and other IT degrees."
       },
       {
         question: "Does the college provide internships?",
@@ -137,7 +137,7 @@ export const programs: Program[] = [
       'Passed +2 or equivalent from any stream with a minimum D+ grade in all subjects.',
       'Must pass the CMAT entrance examination conducted by the university.'
     ],
-    feeStructure: 'Total Course Fee: NPR 5,50,000 (Approx). Paid on a semester basis.',
+    feeStructure: 'Please contact the administration for detailed fee structure.',
     syllabus: [
       'Principles of Management',
       'Financial Accounting',
@@ -194,7 +194,7 @@ export const programs: Program[] = [
       'Passed Bachelor degree in any discipline with a minimum CGPA of 2.0 or 45% marks.',
       'Must pass the entrance examination conducted by PU.'
     ],
-    feeStructure: 'Total Course Fee: NPR 6,00,000 (Approx).',
+    feeStructure: 'Please contact the administration for detailed fee structure.',
     syllabus: [
       'Managerial Economics',
       'Strategic Management',

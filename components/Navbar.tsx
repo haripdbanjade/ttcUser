@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, GraduationCap, Search, FileText, ChevronRight, Loader2, AlertCircle, CheckCircle, ChevronDown } from 'lucide-react';
+import { Menu, X, GraduationCap, Search, ChevronRight, ChevronDown, Camera, Globe } from 'lucide-react';
 import { programs } from '../data/programsData';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Mock Search Data
 const searchIndex = [
@@ -13,24 +14,19 @@ const searchIndex = [
   { title: 'Scholarships', path: '/admissions', type: 'Info' },
   { title: 'Contact Us', path: '/contact', type: 'Page' },
   { title: 'Photo Gallery', path: '/gallery', type: 'Media' },
+  { title: 'Virtual Tour', path: '/tour', type: 'Media' },
   { title: 'Downloads', path: '/downloads', type: 'Resources' },
-  { title: 'News & Events', path: '/blog', type: 'Blog' },
+  { title: 'Careers', path: '/careers', type: 'Page' },
 ];
 
 const nebPrograms = programs.filter(p => p.affiliation === 'NEB');
 const puPrograms = programs.filter(p => p.affiliation === 'PU');
 
-const yearOptions: { [key: string]: string[] } = {
-  '+2 Science': ['Class 11', 'Class 12'],
-  '+2 Management': ['Class 11', 'Class 12'],
-  'BBA': ['1st Year', '2nd Year', '3rd Year', '4th Year'],
-  'MBA': ['1st Year', '2nd Year'],
-};
-
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
+  const [language, setLanguage] = useState('en');
   
   const location = useLocation();
   const navigate = useNavigate();
@@ -38,15 +34,6 @@ export const Navbar: React.FC = () => {
   // Feature States
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [showResultModal, setShowResultModal] = useState(false);
-  
-  // Result Checker States
-  const [symbolNo, setSymbolNo] = useState('');
-  const [dob, setDob] = useState('');
-  const [program, setProgram] = useState('');
-  const [year, setYear] = useState('');
-  const [checkingResult, setCheckingResult] = useState(false);
-  const [resultData, setResultData] = useState<any>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,36 +48,6 @@ export const Navbar: React.FC = () => {
   const searchResults = searchQuery.trim() === '' 
     ? [] 
     : searchIndex.filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()));
-
-  // Mock Result Check
-  const handleCheckResult = (e: React.FormEvent) => {
-    e.preventDefault();
-    setCheckingResult(true);
-    
-    // Simulate API delay
-    setTimeout(() => {
-      setCheckingResult(false);
-      // Mock logic: Even symbol numbers pass, odd fail (just for demo)
-      const isPass = parseInt(symbolNo) % 2 === 0;
-      setResultData({
-        symbolNo,
-        program,
-        year,
-        studentName: "Student Name (Mock)",
-        gpa: isPass ? "3.65" : "N/A",
-        status: isPass ? "PASSED" : "PENDING",
-        remarks: isPass ? "Congratulations!" : "Please contact administration."
-      });
-    }, 1500);
-  };
-
-  const resetResultForm = () => {
-    setResultData(null);
-    setSymbolNo('');
-    setDob('');
-    setProgram('');
-    setYear('');
-  };
 
   const navLinks = [
     { label: 'Home', path: '/' },
@@ -129,7 +86,6 @@ export const Navbar: React.FC = () => {
         { label: 'Classrooms', path: '/gallery#classrooms' },
       ]
     },
-    { label: 'Blog', path: '/blog' },
     { label: 'Contact', path: '/contact' },
   ];
 
@@ -183,6 +139,12 @@ export const Navbar: React.FC = () => {
     );
   };
 
+  const modalVariants = {
+    hidden: { opacity: 0, scale: 0.95, y: -20 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.3, ease: [0.25, 1, 0.5, 1] } },
+    exit: { opacity: 0, scale: 0.95, y: -20, transition: { duration: 0.2 } },
+  };
+
   return (
     <>
       <nav className={`sticky top-0 z-40 transition-all duration-300 border-b ${
@@ -195,7 +157,8 @@ export const Navbar: React.FC = () => {
             isScrolled ? 'h-16' : 'h-20'
           }`}>
             {/* Logo */}
-            <div 
+            <motion.div 
+              whileHover={{ scale: 1.02 }}
               className="flex-shrink-0 flex items-center cursor-pointer group"
               onClick={() => navigate('/')}
             >
@@ -208,11 +171,14 @@ export const Navbar: React.FC = () => {
                 <h1 className={`font-bold text-gray-900 tracking-tight font-serif transition-all duration-300 ${
                   isScrolled ? 'text-lg' : 'text-xl'
                 }`}>Tilottama College</h1>
-                <p className={`text-primary-600 font-medium tracking-wide uppercase transition-all duration-300 ${
-                  isScrolled ? 'text-[10px]' : 'text-xs'
-                }`}>Excellence in Education</p>
+                 <div className="flex items-center gap-2">
+                    <p className={`text-primary-600 font-medium tracking-wide uppercase transition-all duration-300 ${
+                      isScrolled ? 'text-[10px]' : 'text-xs'
+                    }`}>Excellence in Education</p>
+                    <span className={`hidden sm:inline-block bg-green-100 text-green-800 text-[9px] font-bold px-2 py-0.5 rounded-full`}>ISO Certified</span>
+                </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-1 xl:space-x-2">
@@ -249,35 +215,41 @@ export const Navbar: React.FC = () => {
                   {link.isMega && <AcademicDropdown />}
                 </div>
               ))}
+              
+              {/* Language Selector */}
+              <div className="relative group">
+                <button className="flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-primary-600 px-3 py-2 rounded-md hover:bg-gray-100 transition-colors">
+                  <Globe size={16} />
+                  <span>{language === 'en' ? 'EN' : 'NE'}</span>
+                  <ChevronDown size={14} />
+                </button>
+                <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 z-50">
+                  <button onClick={() => setLanguage('en')} className={`w-full text-left px-4 py-2 text-sm ${language === 'en' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-gray-600 hover:bg-gray-50'}`}>English (EN)</button>
+                  <button onClick={() => setLanguage('ne')} className={`w-full text-left px-4 py-2 text-sm ${language === 'ne' ? 'bg-primary-50 text-primary-700 font-semibold' : 'text-gray-600 hover:bg-gray-50'}`}>नेपाली (NE)</button>
+                </div>
+              </div>
 
               <div className="h-6 w-px bg-gray-200 mx-2"></div>
 
               {/* Action Icons */}
               <button 
                 onClick={() => setShowSearch(true)}
-                className="p-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-full transition-colors"
+                className="p-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-full transition-all duration-300"
                 title="Search"
               >
                 <Search size={20} />
               </button>
 
-              <button 
-                onClick={() => setShowResultModal(true)}
-                className="flex items-center gap-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 px-3 py-1.5 rounded-full transition-colors text-sm font-medium"
-                title="Check Results"
-              >
-                <FileText size={18} />
-                <span className="hidden xl:inline">Results</span>
-              </button>
-
-              <button 
-                onClick={() => navigate('/admissions')}
-                className={`bg-primary-700 hover:bg-primary-800 text-white rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 ml-2 ${
+              <motion.button 
+                onClick={() => navigate('/tour')}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                className={`bg-primary-700 text-white rounded-full font-medium shadow-md ml-2 transition-all duration-300 flex items-center gap-2 ${
                   isScrolled ? 'px-4 py-1.5 text-xs' : 'px-5 py-2 text-sm'
                 }`}
               >
-                Apply Now
-              </button>
+                <Camera size={isScrolled ? 14: 16} /> Virtual Tour
+              </motion.button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -292,269 +264,181 @@ export const Navbar: React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="text-gray-500 hover:text-gray-700 p-2 focus:outline-none"
               >
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                <AnimatePresence initial={false} mode="wait">
+                  <motion.div
+                    key={isOpen ? 'x' : 'menu'}
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {isOpen ? <X size={24} /> : <Menu size={24} />}
+                  </motion.div>
+                </AnimatePresence>
               </button>
             </div>
           </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
-        {isOpen && (
-          <div className="lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg h-screen overflow-y-auto pb-20">
-            <div className="px-4 pt-2 pb-6 space-y-2">
-              {navLinks.map((link) => (
-                <div key={link.label}>
-                  <button
-                    onClick={() => {
-                      if (link.children || link.isMega) {
-                        setMobileSubmenuOpen(mobileSubmenuOpen === link.label ? null : link.label);
-                      } else {
-                        navigate(link.path);
-                        setIsOpen(false);
-                      }
-                    }}
-                    className={`flex items-center justify-between w-full text-left px-3 py-3 rounded-md text-base font-medium ${
-                      isActive(link.path)
-                        ? 'bg-primary-50 text-primary-700'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-primary-600'
-                    }`}
-                  >
-                    {link.label}
-                    {(link.children || link.isMega) && (
-                      <ChevronDown 
-                        size={16} 
-                        className={`transition-transform duration-200 ${mobileSubmenuOpen === link.label ? 'rotate-180' : ''}`} 
-                      />
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg"
+            >
+              <div className="px-4 pt-2 pb-6 space-y-2 h-screen overflow-y-auto">
+                {navLinks.map((link) => (
+                  <div key={link.label}>
+                    <button
+                      onClick={() => {
+                        if (link.children || link.isMega) {
+                          setMobileSubmenuOpen(mobileSubmenuOpen === link.label ? null : link.label);
+                        } else {
+                          navigate(link.path);
+                          setIsOpen(false);
+                        }
+                      }}
+                      className={`flex items-center justify-between w-full text-left px-3 py-3 rounded-md text-base font-medium ${
+                        isActive(link.path)
+                          ? 'bg-primary-50 text-primary-700'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-primary-600'
+                      }`}
+                    >
+                      {link.label}
+                      {(link.children || link.isMega) && (
+                        <ChevronDown 
+                          size={16} 
+                          className={`transition-transform duration-200 ${mobileSubmenuOpen === link.label ? 'rotate-180' : ''}`} 
+                        />
+                      )}
+                    </button>
+                    
+                    {/* Mobile Submenu */}
+                    {link.children && !link.isMega && mobileSubmenuOpen === link.label && (
+                      <div className="bg-gray-50 rounded-lg ml-3 mt-1 overflow-hidden">
+                        {link.children.map((child) => (
+                          <button
+                            key={child.label}
+                            onClick={() => {
+                              navigate(child.path);
+                              setIsOpen(false);
+                            }}
+                            className={`block w-full text-left px-4 py-3 text-sm hover:bg-gray-100 border-l-2 ${
+                              location.pathname + location.hash === child.path || (child.path === location.pathname && !location.hash)
+                                ? 'text-primary-600 bg-gray-100 border-primary-500 font-semibold'
+                                : 'text-gray-600 border-transparent hover:text-primary-600 hover:border-primary-400'
+                            }`}
+                          >
+                            {child.label}
+                          </button>
+                        ))}
+                      </div>
                     )}
-                  </button>
-                  
-                  {/* Mobile Submenu */}
-                  {link.children && !link.isMega && mobileSubmenuOpen === link.label && (
-                    <div className="bg-gray-50 rounded-lg ml-3 mt-1 overflow-hidden">
-                      {link.children.map((child) => (
-                        <button
-                          key={child.label}
-                          onClick={() => {
-                            navigate(child.path);
-                            setIsOpen(false);
-                          }}
-                          className={`block w-full text-left px-4 py-3 text-sm hover:bg-gray-100 border-l-2 ${
-                            location.pathname + location.hash === child.path || (child.path === location.pathname && !location.hash)
-                              ? 'text-primary-600 bg-gray-100 border-primary-500 font-semibold'
-                              : 'text-gray-600 border-transparent hover:text-primary-600 hover:border-primary-400'
-                          }`}
-                        >
-                          {child.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                  {link.isMega && mobileSubmenuOpen === link.label && <AcademicDropdown isMobile={true} />}
+                    {link.isMega && mobileSubmenuOpen === link.label && <AcademicDropdown isMobile={true} />}
+                  </div>
+                ))}
+                
+                <div className="px-3 pt-4 mt-4 border-t border-gray-100">
+                  <p className="text-xs font-bold text-gray-400 uppercase mb-2">Language</p>
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => { setLanguage('en'); setIsOpen(false); }}
+                      className={`w-1/2 py-2 rounded-md text-sm font-medium transition-colors ${language === 'en' ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+                    >
+                      English
+                    </button>
+                    <button 
+                      onClick={() => { setLanguage('ne'); setIsOpen(false); }}
+                      className={`w-1/2 py-2 rounded-md text-sm font-medium transition-colors ${language === 'ne' ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-700'}`}
+                    >
+                      नेपाली
+                    </button>
+                  </div>
                 </div>
-              ))}
-               <button 
-                onClick={() => {
-                  setShowResultModal(true);
-                  setIsOpen(false);
-                }}
-                className={`flex items-center gap-3 w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-primary-600`}
-              >
-                <FileText size={18} /> Check Results
-              </button>
-              <button 
-                onClick={() => {
-                  navigate('/admissions');
-                  setIsOpen(false);
-                }}
-                className="w-full mt-4 bg-primary-700 text-white py-3 rounded-md font-medium shadow-md"
-              >
-                Apply Now
-              </button>
-            </div>
-          </div>
-        )}
+
+                <button 
+                  onClick={() => {
+                    navigate('/tour');
+                    setIsOpen(false);
+                  }}
+                  className="w-full mt-6 bg-primary-700 text-white py-3 rounded-md font-medium shadow-md flex items-center justify-center gap-2"
+                >
+                  <Camera size={18} /> Virtual Tour
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* --- Search Modal --- */}
-      {showSearch && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-20 px-4">
-          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden">
-            <div className="p-4 border-b border-gray-100 flex items-center gap-3">
-              <Search className="text-gray-400" size={24} />
-              <input 
-                type="text" 
-                placeholder="Search for programs, notices, pages..." 
-                className="flex-1 text-lg outline-none text-gray-800 placeholder:text-gray-400"
-                autoFocus
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button onClick={() => setShowSearch(false)} className="text-gray-400 hover:text-gray-600">
-                <X size={24} />
-              </button>
-            </div>
-            <div className="bg-gray-50 p-4 min-h-[100px] max-h-[400px] overflow-y-auto">
-              {searchQuery === '' ? (
-                 <div className="text-center text-gray-500 py-8">
-                   <p className="text-sm">Type to start searching</p>
-                 </div>
-              ) : searchResults.length > 0 ? (
-                <div className="space-y-2">
-                  {searchResults.map((result, idx) => (
-                    <button 
-                      key={idx}
-                      onClick={() => {
-                        navigate(result.path);
-                        setShowSearch(false);
-                      }}
-                      className="w-full flex items-center justify-between p-3 bg-white hover:bg-primary-50 rounded-lg border border-gray-200 hover:border-primary-100 transition-all group text-left"
-                    >
-                      <div>
-                        <h4 className="font-semibold text-gray-800 group-hover:text-primary-700">{result.title}</h4>
-                        <span className="text-xs text-gray-500 uppercase tracking-wider">{result.type}</span>
-                      </div>
-                      <ChevronRight size={18} className="text-gray-300 group-hover:text-primary-500" />
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center text-gray-500 py-8">
-                  <p>No results found for "{searchQuery}"</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* --- Result Checker Modal --- */}
-      {showResultModal && (
-        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden relative">
-             <button 
-                onClick={() => { setShowResultModal(false); resetResultForm(); }} 
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-              >
-                <X size={24} />
-              </button>
-
-             <div className="bg-primary-900 p-6 text-center">
-               <div className="bg-white/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm">
-                 <FileText className="text-white" size={32} />
-               </div>
-               <h2 className="text-2xl font-bold text-white font-serif">Check Results</h2>
-               <p className="text-primary-200 text-sm">Enter your academic details to view results</p>
-             </div>
-
-             <div className="p-8">
-               {!resultData ? (
-                 <form onSubmit={handleCheckResult} className="space-y-4">
-                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-1">Program</label>
-                     <select 
-                        required
-                        value={program}
-                        onChange={(e) => {
-                          setProgram(e.target.value);
-                          setYear(''); // Reset year when program changes
+      <AnimatePresence>
+        {showSearch && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-20 px-4"
+          >
+            <motion.div 
+              variants={modalVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden"
+            >
+              <div className="p-4 border-b border-gray-100 flex items-center gap-3">
+                <Search className="text-gray-400" size={24} />
+                <input 
+                  type="text" 
+                  placeholder="Search for programs, notices, pages..." 
+                  className="flex-1 text-lg outline-none text-gray-800 placeholder:text-gray-400"
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button onClick={() => setShowSearch(false)} className="text-gray-400 hover:text-gray-600">
+                  <X size={24} />
+                </button>
+              </div>
+              <div className="bg-gray-50 p-4 min-h-[100px] max-h-[400px] overflow-y-auto">
+                {searchQuery === '' ? (
+                   <div className="text-center text-gray-500 py-8">
+                     <p className="text-sm">Type to start searching</p>
+                   </div>
+                ) : searchResults.length > 0 ? (
+                  <div className="space-y-2">
+                    {searchResults.map((result, idx) => (
+                      <button 
+                        key={idx}
+                        onClick={() => {
+                          navigate(result.path);
+                          setShowSearch(false);
                         }}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none bg-white"
-                     >
-                       <option value="">Select Program</option>
-                       <option value="+2 Science">+2 Science</option>
-                       <option value="+2 Management">+2 Management</option>
-                       <option value="BBA">BBA</option>
-                       <option value="MBA">MBA</option>
-                     </select>
-                   </div>
-
-                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-1">Year / Level</label>
-                      <select 
-                        required
-                        value={year}
-                        onChange={(e) => setYear(e.target.value)}
-                        disabled={!program}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none bg-white disabled:bg-gray-100"
-                     >
-                       <option value="">Select Year</option>
-                       {program && yearOptions[program]?.map(y => (
-                          <option key={y} value={y}>{y}</option>
-                       ))}
-                     </select>
-                   </div>
-
-                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-1">Symbol Number</label>
-                     <input 
-                        type="text" 
-                        required
-                        value={symbolNo}
-                        onChange={(e) => setSymbolNo(e.target.value)}
-                        placeholder="e.g., 20810123"
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none"
-                     />
-                   </div>
-                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
-                     <input 
-                        type="date" 
-                        required
-                        value={dob}
-                        onChange={(e) => setDob(e.target.value)}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-100 outline-none"
-                     />
-                   </div>
-                   <button 
-                    type="submit" 
-                    disabled={checkingResult}
-                    className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
-                   >
-                     {checkingResult ? <Loader2 className="animate-spin" size={20} /> : 'View Result'}
-                   </button>
-                 </form>
-               ) : (
-                 <div className="text-center space-y-4">
-                   <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold ${
-                     resultData.status === 'PASSED' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                   }`}>
-                     {resultData.status === 'PASSED' ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
-                     {resultData.status}
-                   </div>
-                   
-                   <div className="bg-gray-50 rounded-lg p-4 text-left space-y-2 border border-gray-100">
-                     <div className="flex justify-between border-b border-gray-200 pb-2">
-                       <span className="text-gray-500">Program</span>
-                       <span className="font-bold text-xs bg-primary-100 text-primary-700 px-2 py-0.5 rounded">{resultData.program} - {resultData.year}</span>
-                     </div>
-                     <div className="flex justify-between border-b border-gray-200 pb-2">
-                       <span className="text-gray-500">Symbol No</span>
-                       <span className="font-bold">{resultData.symbolNo}</span>
-                     </div>
-                     <div className="flex justify-between border-b border-gray-200 pb-2">
-                       <span className="text-gray-500">Student Name</span>
-                       <span className="font-bold">{resultData.studentName}</span>
-                     </div>
-                     <div className="flex justify-between pb-1">
-                       <span className="text-gray-500">GPA</span>
-                       <span className="font-bold text-primary-600">{resultData.gpa}</span>
-                     </div>
-                   </div>
-                   
-                   <p className="text-sm text-gray-500">{resultData.remarks}</p>
-                   
-                   <button 
-                    onClick={resetResultForm}
-                    className="text-primary-600 font-semibold hover:underline text-sm"
-                   >
-                     Check Another Result
-                   </button>
-                 </div>
-               )}
-             </div>
-          </div>
-        </div>
-      )}
+                        className="w-full flex items-center justify-between p-3 bg-white hover:bg-primary-50 rounded-lg border border-gray-200 hover:border-primary-100 transition-all group text-left"
+                      >
+                        <div>
+                          <h4 className="font-semibold text-gray-800 group-hover:text-primary-700">{result.title}</h4>
+                          <span className="text-xs text-gray-500 uppercase tracking-wider">{result.type}</span>
+                        </div>
+                        <ChevronRight size={18} className="text-gray-300 group-hover:text-primary-500" />
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center text-gray-500 py-8">
+                    <p>No results found for "{searchQuery}"</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

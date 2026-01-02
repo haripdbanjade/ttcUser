@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Target, Eye, Heart, Award, CheckCircle, Quote, Trophy, Medal, Star, Users, Monitor, Zap, Book, Bus, Coffee, Home, Activity, Mic, ChevronDown, HelpCircle, Beaker } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Target, Eye, Heart, Award, CheckCircle, Quote, Trophy, Medal, Star, Users, Monitor, Zap, Book, Bus, Coffee, Home, Activity, Mic, ChevronDown, HelpCircle, Beaker, ArrowRight } from 'lucide-react';
 
 const About: React.FC = () => {
   // State for FAQ accordion
@@ -39,7 +40,7 @@ const About: React.FC = () => {
   const milestones = [
     { year: "1996", title: "Establishment", desc: "Founded with a vision to provide quality higher education in Rupandehi." },
     { year: "2000", title: "Expansion", desc: "Introduced Science stream at +2 level with modern laboratories." },
-    { year: "2008", title: "Bachelor Programs", desc: "Started Bachelor of Business Studies (BBS) program." },
+    { year: "2008", title: "Bachelor Programs", desc: "Launched the Bachelor of Business Administration (BBA) program." },
     { year: "2015", title: "MBA Program", desc: "Launched the Master of Business Administration program to shape future business leaders." },
     { year: "2023", title: "Best College Award", desc: "Recognized as the best college in the province for academic results." }
   ];
@@ -53,18 +54,18 @@ const About: React.FC = () => {
       color: "bg-yellow-100 text-yellow-600"
     },
     {
-      title: "QAA Certified",
-      year: "2022",
-      description: "Received Quality Assurance and Accreditation from the University Grants Commission (UGC), Nepal.",
-      icon: Award,
-      color: "bg-blue-100 text-blue-600"
+      title: "ISO 9001:2015 Certified",
+      year: "2024",
+      description: "Awarded for maintaining international standards in quality management systems for education.",
+      icon: CheckCircle,
+      color: "bg-green-100 text-green-600"
     },
     {
       title: "Sports Champions",
       year: "2023",
       description: "Winner of the Inter-College Cricket and Football tournaments in Rupandehi district.",
       icon: Medal,
-      color: "bg-green-100 text-green-600"
+      color: "bg-blue-100 text-blue-600"
     }
   ];
 
@@ -280,7 +281,7 @@ const About: React.FC = () => {
             <h2 className="text-3xl font-bold text-gray-900 font-serif mb-4">Awards & Recognitions</h2>
             <p className="text-gray-600">Celebrating our milestones of excellence and dedication.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {achievements.map((item, idx) => (
               <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-default">
                 <div className={`w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform ${item.color}`}>
@@ -378,7 +379,7 @@ const About: React.FC = () => {
         </div>
       </div>
 
-      {/* 2.5 Management Team */}
+      {/* 2.5 Leadership Team */}
       <div className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -388,7 +389,7 @@ const About: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member, idx) => (
-              <div key={idx} className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-all group">
+              <div key={idx} className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 group transform hover:-translate-y-1">
                 <div className="relative overflow-hidden h-64">
                   <img 
                     src={member.image} 
@@ -405,6 +406,15 @@ const About: React.FC = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link 
+                to="/team" 
+                className="inline-flex items-center gap-2 bg-primary-600 text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors shadow-md transform hover:scale-105"
+            >
+                View All Faculty & Staff <ArrowRight size={18} />
+            </Link>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ const testimonials = [
     name: "Aarav Sharma",
     role: "Alumni",
     course: "+2 Science",
-    batch: "2020",
+    batch: "2026",
     image: "https://i.pravatar.cc/150?u=10",
     text: "Tilottama gave me the foundation I needed to crack the IOE entrance. The faculty is incredibly supportive and the library resources are unmatched in the region."
   },
@@ -17,7 +17,7 @@ const testimonials = [
     name: "Priya Karki",
     role: "Student",
     course: "+2 Management",
-    batch: "2023",
+    batch: "2026",
     image: "https://i.pravatar.cc/150?u=20",
     text: "Beyond academics, the extracurricular activities here helped me build confidence and leadership skills. The science labs are modern and we get plenty of practical exposure."
   },
@@ -34,17 +34,17 @@ const testimonials = [
     id: 5,
     name: "Binod Chaudhary",
     role: "Alumni",
-    course: "BBS",
-    batch: "2018",
+    course: "BBA",
+    batch: "2026",
     image: "https://i.pravatar.cc/150?u=50",
-    text: "The management faculty is top-notch. The case-study based approach in BBS helped me understand real-world business dynamics effectively."
+    text: "The management faculty is top-notch. The case-study based approach in BBA helped me understand real-world business dynamics effectively."
   },
   {
     id: 6,
     name: "Anjali Gurung",
     role: "Alumni",
     course: "+2 Science",
-    batch: "2019",
+    batch: "2026",
     image: "https://i.pravatar.cc/150?u=60",
     text: "I owe my success in the medical entrance exam to the rigorous coaching and guidance I received during my +2 Science years at Tilottama."
   },
@@ -53,7 +53,7 @@ const testimonials = [
     name: "Sunita Magar",
     role: "Alumni",
     course: "+2 Management",
-    batch: "2021",
+    batch: "2026",
     image: "https://i.pravatar.cc/150?u=80",
     text: "I learned discipline and time management here. The faculty members are not just teachers but mentors for life."
   }
@@ -174,7 +174,7 @@ const Testimonials: React.FC = () => {
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {currentTestimonials.map((t) => (
-                <div key={t.id} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-all duration-300 group">
+                <div key={t.id} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:shadow-lg transition-all duration-300 group transform hover:-translate-y-1">
                   <div className="flex justify-between items-start mb-6">
                     <div className="flex items-center gap-1">
                       {[1, 2, 3, 4, 5].map((s) => (
