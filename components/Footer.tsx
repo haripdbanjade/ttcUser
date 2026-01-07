@@ -42,11 +42,13 @@ const Footer: React.FC<FooterProps> = ({ setShowResultModal }) => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone size={18} className="text-primary-500 shrink-0" />
-                <span>+977-71-123456, 9857012345</span>
+                <span>
+                  <a href="tel:+977-71-123456" className="hover:text-white transition-colors">+977-71-123456</a>
+                </span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={18} className="text-primary-500 shrink-0" />
-                <span>info@tilottama.edu.np</span>
+                <a href="mailto:info@tilottama.edu.np" className="hover:text-white transition-colors">info@tilottama.edu.np</a>
               </div>
             </div>
 
@@ -136,14 +138,34 @@ const Footer: React.FC<FooterProps> = ({ setShowResultModal }) => {
 
             <div className="mt-6">
               <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Key Contacts</h4>
-               <div className="flex flex-col gap-2 text-xs text-gray-400">
-                  <div className="flex justify-between border-b border-gray-800 pb-1">
-                    <span>Admission</span>
-                    <span className="text-gray-300">9857033333</span>
+               <div className="space-y-3 text-sm">
+                  <div className="pb-2 border-b border-gray-800">
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold text-gray-300">+2 Admissions</span>
+                      <a href="tel:+977-9857012345" className="text-gray-300 hover:text-white transition-colors">+977-9857012345</a>
+                    </div>
+                    <span className="text-xs text-gray-500">Mrs. Sarita Sharma</span>
                   </div>
-                  <div className="flex justify-between border-b border-gray-800 pb-1">
-                    <span>Exam Section</span>
-                    <span className="text-gray-300">9857044444</span>
+                   <div className="pb-2 border-b border-gray-800">
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold text-gray-300">BBA/MBA Admissions</span>
+                      <a href="tel:+977-9857067890" className="text-gray-300 hover:text-white transition-colors">+977-9857067890</a>
+                    </div>
+                    <span className="text-xs text-gray-500">Dr. Rita Pandey</span>
+                  </div>
+                   <div className="pb-2 border-b border-gray-800">
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold text-gray-300">NEB (+2) Exam Section</span>
+                      <a href="tel:+977-9857044444" className="text-gray-300 hover:text-white transition-colors">+977-9857044444</a>
+                    </div>
+                     <span className="text-xs text-gray-500">Mr. Rajan K.C.</span>
+                  </div>
+                   <div className="pb-2 border-b border-gray-800">
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold text-gray-300">PU (BBA/MBA) Exam Section</span>
+                      <a href="tel:+977-9857055555" className="text-gray-300 hover:text-white transition-colors">+977-9857055555</a>
+                    </div>
+                     <span className="text-xs text-gray-500">Mrs. Anjana Thapa</span>
                   </div>
                </div>
             </div>

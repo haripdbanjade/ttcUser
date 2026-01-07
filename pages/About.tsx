@@ -12,15 +12,15 @@ const About: React.FC = () => {
 
   const teamMembers = [
     {
-      name: "Dr. Ram Chandra Pandey",
-      role: "Campus Chief",
-      qualification: "Ph.D. in Physics",
+      name: "Prof. Dr. Ram Chandra Acharya",
+      role: "Principal",
+      qualification: "Ph.D. in Economics",
       image: "https://picsum.photos/400/400?random=50"
     },
     {
-      name: "Prof. Krishna Prasad",
-      role: "Academic Director",
-      qualification: "M.Sc. Mathematics",
+      name: "Mukunda Raj Acharya",
+      role: "Vice-Principal",
+      qualification: "M.A. Mathematics",
       image: "https://picsum.photos/400/400?random=51"
     },
     {
@@ -30,17 +30,17 @@ const About: React.FC = () => {
       image: "https://picsum.photos/400/400?random=52"
     },
     {
-      name: "Parbin Gyawali",
-      role: "MBA COORDINATOR",
-      qualification: "MBA",
+      name: "Dr. Santosh Gyawali",
+      role: "Head of Management",
+      qualification: "PhD, TU",
       image: "https://picsum.photos/400/400?random=53"
     }
   ];
 
   const milestones = [
     { year: "1996", title: "Establishment", desc: "Founded with a vision to provide quality higher education in Rupandehi." },
+    { year: "1999", title: "First BBA Program", desc: "Pioneered management education by launching the first BBA program in the region." },
     { year: "2000", title: "Expansion", desc: "Introduced Science stream at +2 level with modern laboratories." },
-    { year: "2008", title: "Bachelor Programs", desc: "Launched the Bachelor of Business Administration (BBA) program." },
     { year: "2015", title: "MBA Program", desc: "Launched the Master of Business Administration program to shape future business leaders." },
     { year: "2023", title: "Best College Award", desc: "Recognized as the best college in the province for academic results." }
   ];

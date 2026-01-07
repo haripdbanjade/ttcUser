@@ -46,9 +46,9 @@ const featuredPrograms = [
     bgImage: "https://picsum.photos/600/800?random=11",
     link: "/academics#science",
     highlights: [
-      { text: "State-of-the-art Labs", icon: Beaker },
-      { text: "IOE/IOM Prep Focus", icon: Target },
-      { text: "Experienced Faculty", icon: Users },
+      { text: "Advanced Science Labs", icon: Beaker },
+      { text: "IOE & IOM Prep Classes", icon: Target },
+      { text: "Top Faculty Team", icon: Users },
     ]
   },
   { 
@@ -57,9 +57,9 @@ const featuredPrograms = [
     bgImage: "https://picsum.photos/600/800?random=12",
     link: "/academics#management",
     highlights: [
-      { text: "Practical Case Studies", icon: Briefcase },
-      { text: "Industry Visits", icon: Award },
-      { text: "Multiple Specializations", icon: Star },
+      { text: "Real-world Case Studies", icon: Briefcase },
+      { text: "Industrial Tours", icon: Award },
+      { text: "Diverse Specializations", icon: Star },
     ]
   },
   { 
@@ -69,8 +69,8 @@ const featuredPrograms = [
     link: "/academics#bba",
     highlights: [
       { text: "Project-Based Learning", icon: BarChart3 },
-      { text: "Leadership Workshops", icon: Users },
-      { text: "Internship Opportunities", icon: Briefcase },
+      { text: "Leadership Development", icon: Users },
+      { text: "Mandatory Internships", icon: Briefcase },
     ]
   },
   { 
@@ -79,9 +79,9 @@ const featuredPrograms = [
     bgImage: "https://picsum.photos/600/800?random=14",
     link: "/academics#mba",
     highlights: [
-      { text: "Strategic Leadership Focus", icon: Target },
-      { text: "Global Business Perspective", icon: Star },
-      { text: "Executive Workshops", icon: Users },
+      { text: "Executive Leadership", icon: Target },
+      { text: "Global Business Focus", icon: Star },
+      { text: "Networking Events", icon: Users },
     ]
   }
 ];
@@ -528,17 +528,17 @@ const Home: React.FC = () => {
                   <span className="w-8 h-[2px] bg-primary-600 inline-block"></span>
                   Message from the Principal
                 </h4>
-                <h2 className="text-3xl font-bold text-gray-900 font-serif">Welcome to Tilottama</h2>
+                <h2 className="text-3xl font-bold text-gray-900 font-serif">Inspiring Innovation and Learning</h2>
               </div>
               <div className="relative">
                 <Quote className="absolute -top-6 -left-6 text-primary-200 w-16 h-16 transform -scale-x-100 opacity-40" />
                 <p className="text-gray-700 leading-relaxed text-lg relative z-10 italic">
-                  "Education is not just about gathering knowledge, but about shaping character. At Tilottama College, we strive to provide an environment where students can explore their potential, challenge their limits, and emerge as leaders of tomorrow. We are committed to academic excellence and holistic growth."
+                  "Our primary focus is on creating an environment that inspires innovation and a lifelong love of learning. We believe in a holistic educational approach that focuses on both academic proficiency and interpersonal leadership skills."
                 </p>
               </div>
               <div>
-                <p className="font-bold text-gray-900 text-xl font-serif">Dr. Ram Chandra Pandey</p>
-                <p className="text-primary-600 font-medium">Campus Chief</p>
+                <p className="font-bold text-gray-900 text-xl font-serif">Prof. Dr. Ram Chandra Acharya</p>
+                <p className="text-primary-600 font-medium">Principal</p>
               </div>
             </div>
           </div>

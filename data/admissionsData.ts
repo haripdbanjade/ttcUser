@@ -19,6 +19,11 @@ export interface AdmissionInfo {
   }[];
   prospectusUrl: string;
   formPrograms: Program['title'][];
+  contactPerson?: {
+    name: string;
+    role: string;
+    phone: string;
+  };
 }
 
 export const admissionsData: AdmissionInfo[] = [
@@ -57,7 +62,12 @@ export const admissionsData: AdmissionInfo[] = [
       { event: 'Classes Start', date: 'August 01, 2024' }
     ],
     prospectusUrl: '#',
-    formPrograms: ['+2 Science', '+2 Management']
+    formPrograms: ['+2 Science', '+2 Management'],
+    contactPerson: {
+      name: 'Mrs. Sarita Sharma',
+      role: '+2 Coordinator',
+      phone: '+977-9857012345'
+    }
   },
   {
     id: 'pu',
@@ -94,6 +104,11 @@ export const admissionsData: AdmissionInfo[] = [
       { event: 'Classes Start', date: 'November 2024' }
     ],
     prospectusUrl: '#',
-    formPrograms: ['BBA (Bachelor of Business Administration)', 'MBA (Master of Business Administration)']
+    formPrograms: ['BBA (Bachelor of Business Administration)', 'MBA (Master of Business Administration)'],
+    contactPerson: {
+        name: 'Dr. Rita Pandey',
+        role: 'BBA/MBA Program Coordinator',
+        phone: '+977-9857067890'
+    }
   }
 ];

@@ -1,4 +1,5 @@
 import { Program } from '../types';
+import { nebToppers, medicalAlumni, engineeringAlumni } from './achievementsData';
 
 export const programs: Program[] = [
   {
@@ -16,14 +17,25 @@ export const programs: Program[] = [
       'Minimum D+ grade in English, Nepali, and Social Studies'
     ],
     feeStructure: 'Please contact the administration for detailed fee structure.',
-    syllabus: [
-      'Physics',
-      'Chemistry',
-      'Mathematics (Compulsory)',
-      'English',
-      'Nepali',
-      'Optional Group: Biology or Computer Science'
-    ],
+    syllabus: {
+      gradeXI: [
+        'Compulsory English',
+        'Compulsory Nepali',
+        'Social Studies',
+        'Physics I',
+        'Chemistry I',
+        'Mathematics I',
+        'Optional: Biology I or Computer Science I',
+      ],
+      gradeXII: [
+        'Compulsory English',
+        'Compulsory Nepali',
+        'Physics II',
+        'Chemistry II',
+        'Mathematics II',
+        'Optional: Biology II or Computer Science II',
+      ],
+    },
     syllabusPdf: '#science-syllabus',
     careerOpportunities: [
       'Medical Doctor (MBBS, BDS)',
@@ -32,10 +44,14 @@ export const programs: Program[] = [
       'IT Professional',
       'Researcher / Scientist'
     ],
-    faculty: [
-      { name: "Dr. H.P. Sharma", role: "Physics HOD", image: "https://picsum.photos/200/200?random=60" },
-      { name: "Mr. R.K. Yadav", role: "Chemistry Senior Faculty", image: "https://picsum.photos/200/200?random=61" },
-      { name: "Mrs. S. Karki", role: "Biology Coordinator", image: "https://picsum.photos/200/200?random=62" }
+    facultyIds: [
+      'chem-1', 'chem-2', 'chem-3', 'chem-4', 'chem-5', 'chem-6', 'chem-7', 'chem-8', 'chem-9', 'chem-10', 'chem-11', 'chem-12', 'chem-13',
+      'phy-1', 'phy-2', 'phy-3', 'phy-4', 'phy-5', 'phy-6', 'phy-7',
+      'bio-1', 'bio-2', 'bio-3', 'bio-4', 'bio-5', 'bio-6',
+      'math-1', 'math-2', 'math-3', 'math-4', 'math-5', 'math-6', 'math-7', 'math-8',
+      'eng-1', 'eng-2', 'eng-3', 'eng-4', 'eng-5', 'eng-6',
+      'nep-1', 'nep-2', 'nep-3', 'nep-4', 'nep-5',
+      'cs-1', 'cs-2', 'cs-3', 'cs-4', 'cs-5', 'cs-6'
     ],
     admissionRequirements: [
       'Completed Online Application Form',
@@ -62,7 +78,21 @@ export const programs: Program[] = [
         question: "Can I choose both Biology and Computer Science?",
         answer: "Students must choose one optional group, either Biology or Computer Science, alongside the compulsory subjects."
       }
-    ]
+    ],
+    achievementHighlights: {
+      title: 'A Legacy of Success in Science',
+      stats: [
+        { value: '150+', label: 'MBBS/BDS Placements' },
+        { value: '300+', label: 'BE Placements' },
+        { value: '50+', label: 'B.Sc. Ag/Vet/Forestry' },
+        { value: '70+', label: 'B.Sc. CSIT & Paramedical' },
+      ],
+      topperList: nebToppers,
+      alumniLists: [
+        { category: 'Medical Professionals', names: medicalAlumni.map(a => a.name) },
+        { category: 'Engineering Professionals', names: engineeringAlumni.map(a => a.name) },
+      ],
+    }
   },
   {
     id: 'management',
@@ -79,14 +109,23 @@ export const programs: Program[] = [
       'Interest in business and commerce'
     ],
     feeStructure: 'Please contact the administration for detailed fee structure.',
-    syllabus: [
-      'Accountancy',
-      'Economics',
-      'Business Studies',
-      'English & Nepali',
-      'Social Studies',
-      'Specialization (Choose one): Hotel Management (H.M.), Finance, or Computer Science'
-    ],
+    syllabus: {
+      gradeXI: [
+        'Compulsory English',
+        'Compulsory Nepali',
+        'Social Studies',
+        'Accountancy I',
+        'Economics I',
+      ],
+      gradeXII: [
+        'Compulsory English',
+        'Compulsory Nepali',
+        'Accountancy II',
+        'Economics II',
+        'Business Studies',
+        'Optional: Computer Science, Finance, Hotel Management, or Business Mathematics',
+      ],
+    },
     syllabusPdf: '#management-syllabus',
     careerOpportunities: [
       'Chartered Accountant (CA)',
@@ -95,9 +134,12 @@ export const programs: Program[] = [
       'Hotel Manager',
       'Marketing Executive'
     ],
-    faculty: [
-      { name: "Mr. B.B. Singh", role: "Management Coordinator", image: "https://picsum.photos/200/200?random=63" },
-      { name: "Mrs. A. Tuladhar", role: "Accountancy Faculty", image: "https://picsum.photos/200/200?random=64" }
+    facultyIds: [
+      'mgmt-1', 'mgmt-2', 'mgmt-3', 'mgmt-4', 'mgmt-5', 'mgmt-6', 'mgmt-7', 'mgmt-8', 'mgmt-9', 'mgmt-10', 'mgmt-11', 'mgmt-12', 'mgmt-13', 'mgmt-14', 'mgmt-15',
+      'math-1', 'math-2', 'math-3', 'math-4', 'math-5', 'math-6', 'math-7', 'math-8',
+      'eng-1', 'eng-2', 'eng-3', 'eng-4', 'eng-5', 'eng-6',
+      'nep-1', 'nep-2', 'nep-3', 'nep-4', 'nep-5',
+      'cs-1', 'cs-2', 'cs-3', 'cs-4', 'cs-5', 'cs-6'
     ],
     admissionRequirements: [
       'Completed Online Application Form',
@@ -122,7 +164,17 @@ export const programs: Program[] = [
         question: "Does the college provide internships?",
         answer: "We facilitate internships for Hotel Management students in reputed hotels. For business students, we organize industrial visits."
       }
-    ]
+    ],
+    achievementHighlights: {
+        title: 'Pathways to Professional Success',
+        stats: [
+          { value: 'Top Ranks', label: 'in NEB/HSEB Exams' },
+          { value: 'Strong Alumni', label: 'in Banking Sector' },
+          { value: 'Proven Success', label: 'in Public Service (Lok Sewa)' },
+          { value: 'Future Leaders', label: 'in Business & Entrepreneurship' },
+        ],
+        topperList: nebToppers
+    }
   },
   {
     id: 'bba',
@@ -132,34 +184,21 @@ export const programs: Program[] = [
     description: 'A comprehensive program focusing on business management, leadership, and entrepreneurial skills.',
     duration: '4 Years (8 Semesters)',
     image: 'https://picsum.photos/800/600?random=14',
-    overview: 'The Bachelor of Business Administration (BBA) program at Tilottama College, affiliated with Pokhara University, is designed to develop socially responsible, creative, and result-oriented management professionals to fill up the middle-level managerial positions in the rapidly growing business sector in Nepal and abroad. The program provides students with a sound conceptual foundation and practical skills in various areas of business.',
+    overview: "The Bachelor of Business Administration (BBA) program at Tilottama College, affiliated with Pokhara University, is designed to develop socially responsible, creative, and result-oriented management professionals. As the first college to launch a BBA program in the region in 1999, we have a legacy of excellence. Our curriculum emphasizes applied learning through internships, community engagement, and field trips to connect with corporate houses, providing students with a sound conceptual foundation and practical skills.",
     eligibility: [
       'Passed +2 or equivalent from any stream with a minimum D+ grade in all subjects.',
       'Must pass the CMAT entrance examination conducted by the university.'
     ],
     feeStructure: 'Please contact the administration for detailed fee structure.',
     syllabus: [
-      'Principles of Management',
-      'Financial Accounting',
-      'Business Communication',
-      'Organizational Behavior',
-      'Human Resource Management',
-      'Marketing Management',
-      'Financial Management',
-      'Business Research Methods'
+      'English I', 'Basic Mathematics', 'IT for Business', 'Behavioral Science', 'Principles of Management', 'Data Analysis & Modeling', 'Business and Society', 'Business Research Methods', 'Human Resource Management', 'Financial Management', 'Internship'
     ],
     syllabusPdf: '#bba-syllabus',
     careerOpportunities: [
-      'Marketing Manager',
-      'HR Manager',
-      'Financial Analyst',
-      'Investment Banker',
-      'Business Consultant',
-      'Entrepreneur'
+      'General Manager', 'Project Manager', 'Financial Analyst', 'Investment Banker', 'Chief Marketing Officer', 'Sales Manager', 'Market Research Analyst', 'Management Consultant', 'Corporate Trainer', 'Entrepreneur'
     ],
-    faculty: [
-      { name: "Dr. R. Pandey", role: "Department Head", image: "https://picsum.photos/200/200?random=67" },
-      { name: "Mr. S.R. Khanal", role: "Senior Lecturer", image: "https://picsum.photos/200/200?random=92" }
+    facultyIds: [
+      'mgmt-new-1', 'mgmt-new-2', 'mgmt-new-3', 'mgmt-new-4', 'mgmt-new-5', 'mgmt-new-6', 'mgmt-new-7', 'mgmt-new-8', 'mgmt-new-9', 'mgmt-new-10', 'mgmt-new-11', 'mgmt-new-12', 'mgmt-new-13', 'mgmt-new-14', 'mgmt-new-15', 'mgmt-new-16', 'mgmt-new-17', 'mgmt-new-18', 'mgmt-new-19', 'mgmt-new-20', 'mgmt-new-21', 'mgmt-new-22', 'mgmt-new-23', 'mgmt-new-24', 'mgmt-new-25', 'mgmt-new-26'
     ],
     admissionRequirements: [
       'Academic Transcripts of +2',
@@ -179,7 +218,16 @@ export const programs: Program[] = [
         question: "What are the specialization areas available?",
         answer: "Students can choose to specialize in areas like Marketing, Finance, or Human Resource Management in their final year."
       }
-    ]
+    ],
+    achievementHighlights: {
+      title: 'Alumni in Leadership Roles',
+      stats: [
+        { value: 'Proven Track Record', label: 'in Corporate Placements' },
+        { value: 'Successful Entrepreneurs', label: 'in Various Sectors' },
+        { value: 'Leaders in Banking', label: 'and Financial Institutions' },
+        { value: 'High Success Rate', label: 'in Public Service Exams' },
+      ],
+    }
   },
   {
     id: 'mba',
@@ -189,33 +237,22 @@ export const programs: Program[] = [
     description: 'An executive-level program for aspiring business leaders and strategic thinkers.',
     duration: '2 Years (4 Semesters)',
     image: 'https://picsum.photos/800/600?random=16',
-    overview: 'The Master of Business Administration (MBA) program at Tilottama College is an internationally recognized degree designed to develop the skills required for careers in business and management. The value of the MBA, however, is not limited strictly to the business world. An MBA can also be useful for those pursuing a managerial career in the public sector, government, private industry, and other areas.',
+    overview: 'The Master of Business Administration (MBA) program at Tilottama College is an internationally recognized degree designed to deepen advanced business topics and specializations, blending academic theory with practical application through internships and projects. The value of the MBA is not limited strictly to the business world; it is also useful for those pursuing a managerial career in the public sector, government, and private industry.',
     eligibility: [
-      'Passed Bachelor degree in any discipline with a minimum CGPA of 2.0 or 45% marks.',
-      'Must pass the entrance examination conducted by PU.'
+      '15 years of formal education (12 years schooling + 3-year Bachelor\'s degree).',
+      'Minimum CGPA of 2.0 or 45% at the Bachelor\'s level.',
+      'Must pass university entrance examination and interview.'
     ],
     feeStructure: 'Please contact the administration for detailed fee structure.',
     syllabus: [
-      'Managerial Economics',
-      'Strategic Management',
-      'Corporate Finance',
-      'Global Marketing Management',
-      'Leadership and Organizational Behavior',
-      'Entrepreneurship',
-      'Business Analytics',
-      'Thesis Writing'
+      'Accounting for Managerial Decisions', 'Statistics for Managers', 'Managerial Economics', 'Organizational Behavior', 'Financial Management', 'Quantitative Methods', 'Macroeconomics & Global Economy', 'Operations & Supply Chain', 'Marketing Management', 'Business Environment and Strategy', 'Capstone Project'
     ],
     syllabusPdf: '#mba-syllabus',
     careerOpportunities: [
-      'Chief Executive Officer (CEO)',
-      'Management Consultant',
-      'Investment Banker',
-      'Operations Manager',
-      'Marketing Director',
-      'Policy Advisor'
+      'Chief Executive Officer (CEO)', 'General Manager', 'Executive Director', 'Project Manager', 'CFO', 'Financial Analyst', 'Investment Banker', 'Chief Marketing Officer', 'Sales Manager', 'Management Consultant', 'Corporate Trainer', 'Entrepreneur'
     ],
-    faculty: [
-      { name: "Prof. K. Acharya", role: "Program Director", image: "https://picsum.photos/200/200?random=68" }
+    facultyIds: [
+      'mgmt-new-1', 'mgmt-new-2', 'mgmt-new-3', 'mgmt-new-4', 'mgmt-new-5', 'mgmt-new-6', 'mgmt-new-7', 'mgmt-new-8', 'mgmt-new-9', 'mgmt-new-10', 'mgmt-new-11', 'mgmt-new-12', 'mgmt-new-13', 'mgmt-new-14', 'mgmt-new-15', 'mgmt-new-16', 'mgmt-new-17', 'mgmt-new-18', 'mgmt-new-19', 'mgmt-new-20', 'mgmt-new-21', 'mgmt-new-22', 'mgmt-new-23', 'mgmt-new-24', 'mgmt-new-25', 'mgmt-new-26'
     ],
     admissionRequirements: [
       'Bachelor Degree Transcripts',
@@ -236,6 +273,15 @@ export const programs: Program[] = [
         question: "Do you have evening classes for the MBA?",
         answer: "Yes, we have an executive MBA program with evening classes tailored for working professionals."
       }
-    ]
+    ],
+    achievementHighlights: {
+      title: 'Shaping Executive Leaders',
+      stats: [
+        { value: 'C-Suite Executives', label: 'in Multinational Companies' },
+        { value: 'Strategic Consultants', label: 'in Top Firms' },
+        { value: 'Policy Advisors', label: 'in Governmental Organizations' },
+        { value: 'Successful Founders', label: 'of Innovative Startups' },
+      ],
+    }
   }
 ];

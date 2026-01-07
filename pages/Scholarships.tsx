@@ -6,7 +6,21 @@ const scholarshipTypes = [
   { icon: GraduationCap, color: 'text-blue-500', title: 'Academic / Merit-Based', description: 'Awarded to students with outstanding academic records in SEE/+2 and our entrance exams. A certain percentage of tuition fee is waived based on performance.' },
   { icon: Users, color: 'text-green-500', title: 'Need-Based Scholarships', description: 'Financial assistance for students from economically disadvantaged backgrounds or remote areas, subject to document verification.' },
   { icon: Star, color: 'text-yellow-500', title: 'Talent-Based Scholarships', description: 'For students who have shown exceptional talent in sports, arts, leadership, or innovation at regional or national levels.' },
-  { icon: Shield, color: 'text-red-500', title: 'Reserved & Special Scholarships', description: 'Provided to students from marginalized groups, differently-abled students, and children of martyrs as per college policy.' },
+  { icon: Shield, color: 'text-red-500', title: 'Reserved & Special Scholarships', description: 'Provided for students from marginalized groups, differently-abled students, children of martyrs, and those with recommendations from Tilottama Municipality.' },
+];
+
+const nebSchemes = [
+    { icon: Award, title: 'Entrance Exam Toppers', description: 'Scholarships for the top 24 students in the entrance exam (based on combined SEE + entrance scores).' },
+    { icon: Star, title: 'SEE District Toppers', description: 'Special scholarships for students who have secured top positions in the SEE within the district.' },
+    { icon: FileText, title: 'Municipality Recommendations', description: 'Scholarships for students with official recommendations from the Tilottama Municipality.' },
+    { icon: Users, title: 'Needy & Meritorious Students', description: 'Dedicated support for academically promising students facing financial hardships.' }
+];
+
+const puSchemes = [
+    { icon: Award, title: 'University Entrance Toppers', description: 'Significant scholarships for students securing top ranks in university entrance exams like CMAT.' },
+    { icon: Star, title: 'Semester Toppers', description: 'Full or partial tuition waivers for students who achieve the top position in their respective semesters.' },
+    { icon: GraduationCap, title: 'Academic Excellence Scholarship', description: 'Awarded to students with outstanding academic records in their previous degree (+2 for Bachelor, Bachelor for Master).' },
+    { icon: Users, title: 'Financial Aid for Deserving Students', description: 'Support for academically strong students facing financial constraints at the university level.' }
 ];
 
 const eligibilityCriteria = [
@@ -50,6 +64,62 @@ const Scholarships: React.FC = () => {
                 <p className="text-gray-600 text-sm">{scholarship.description}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Key Scholarship Schemes Section */}
+        <section className="mb-20">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900 font-serif mb-4">Our Commitment to Accessibility</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We offer tailored scholarship schemes for both NEB and PU level students to ensure everyone has an opportunity to excel.
+            </p>
+          </div>
+
+           {/* NEB Section */}
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-gray-800 font-serif mb-6 text-center border-b pb-4">
+              <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-lg">NEB (+2) Programs</span>
+            </h3>
+            <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+              Tilottama provides scholarships to <span className="font-bold text-primary-600">7% to 10%</span> of its +2 students annually based on the following key criteria:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {nebSchemes.map((scheme, index) => (
+                <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start gap-5 hover:border-primary-200 transition-all">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center text-primary-600">
+                    <scheme.icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-1">{scheme.title}</h3>
+                    <p className="text-gray-600 text-sm">{scheme.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* PU Section */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold text-gray-800 font-serif mb-6 text-center border-b pb-4">
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-lg">PU (Bachelor/Master) Programs</span>
+            </h3>
+            <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+              For our university-level programs, scholarships are awarded to recognize academic achievement, entrance performance, and support student potential.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {puSchemes.map((scheme, index) => (
+                <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-start gap-5 hover:border-primary-200 transition-all">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center text-primary-600">
+                    <scheme.icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-1">{scheme.title}</h3>
+                    <p className="text-gray-600 text-sm">{scheme.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

@@ -9,13 +9,19 @@ export interface Program {
   overview: string;
   eligibility: string[];
   feeStructure: string;
-  syllabus: string[];
+  syllabus: string[] | { gradeXI: string[]; gradeXII: string[] };
   syllabusPdf?: string;
   careerOpportunities: string[];
-  faculty: { name: string; role: string; image: string }[];
+  facultyIds: string[];
   admissionRequirements: string[];
   gallery: string[];
   faq?: { question: string; answer: string }[];
+  achievementHighlights?: {
+    title: string;
+    stats: { value: string; label: string }[];
+    topperList?: { year: string; name: string; achievement: string }[];
+    alumniLists?: { category: string; names: string[] }[];
+  };
 }
 
 export interface Testimonial {

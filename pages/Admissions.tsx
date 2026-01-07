@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CheckCircle, Calendar, FileText, Download, HelpCircle, ChevronDown, AlertCircle, X, Send, BookOpen, GraduationCap, Award } from 'lucide-react';
+import { CheckCircle, Calendar, FileText, Download, HelpCircle, ChevronDown, AlertCircle, X, Send, BookOpen, GraduationCap, Award, User, Phone } from 'lucide-react';
 import { admissionsData, AdmissionInfo } from '../data/admissionsData';
 
 interface FormState {
@@ -163,58 +163,76 @@ const AdmissionDetail: React.FC<{ info: AdmissionInfo }> = ({ info }) => {
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 space-y-10">
-                <section>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Eligibility Criteria</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {info.eligibility.map((item, idx) => (
-                    <div key={idx} className="bg-gray-50 rounded-lg p-6 border border-gray-100">
-                        <h4 className="font-bold text-gray-800 mb-3 text-lg">{item.program}</h4>
-                        <ul className="space-y-2">
-                        {item.criteria.map((c, cIdx) => (
-                            <li key={cIdx} className="flex items-start gap-3 text-gray-600">
-                            <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{c}</span>
-                            </li>
-                        ))}
-                        </ul>
-                    </div>
-                    ))}
-                </div>
-                </section>
+              <div className="lg:col-span-2 space-y-10">
+                  <section>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Eligibility Criteria</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {info.eligibility.map((item, idx) => (
+                      <div key={idx} className="bg-gray-50 rounded-lg p-6 border border-gray-100">
+                          <h4 className="font-bold text-gray-800 mb-3 text-lg">{item.program}</h4>
+                          <ul className="space-y-2">
+                          {item.criteria.map((c, cIdx) => (
+                              <li key={cIdx} className="flex items-start gap-3 text-gray-600">
+                              <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                              <span>{c}</span>
+                              </li>
+                          ))}
+                          </ul>
+                      </div>
+                      ))}
+                  </div>
+                  </section>
 
-                <section>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Application Process</h3>
-                <div className="space-y-6">
-                    {info.process.map((step, idx) => (
-                    <div key={idx} className="flex items-start gap-4">
-                        <div className="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center font-bold flex-shrink-0">{idx + 1}</div>
-                        <div>
-                        <h4 className="font-bold text-gray-800">{step.title}</h4>
-                        <p className="text-gray-600 text-sm mt-1">{step.description}</p>
-                        </div>
-                    </div>
+                  <section>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Application Process</h3>
+                  <div className="space-y-6">
+                      {info.process.map((step, idx) => (
+                      <div key={idx} className="flex items-start gap-4">
+                          <div className="w-10 h-10 bg-primary-100 text-primary-600 rounded-full flex items-center justify-center font-bold flex-shrink-0">{idx + 1}</div>
+                          <div>
+                          <h4 className="font-bold text-gray-800">{step.title}</h4>
+                          <p className="text-gray-600 text-sm mt-1">{step.description}</p>
+                          </div>
+                      </div>
+                      ))}
+                  </div>
+                  </section>
+              </div>
+              
+              <div className="space-y-8">
+                <div className="bg-gray-50 p-6 rounded-xl h-fit border border-gray-100">
+                    <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2"><Calendar className="w-5 h-5 text-primary-600" /> Key Dates</h3>
+                    <ul className="space-y-4 text-sm">
+                    {info.keyDates.map((item, idx) => (
+                        <li key={idx} className="flex justify-between pb-2 border-b border-gray-200 last:border-0 last:pb-0">
+                        <span className="text-gray-600">{item.event}</span>
+                        <span className="font-medium text-gray-900 text-right">{item.date}</span>
+                        </li>
                     ))}
+                    </ul>
+                    <div className="mt-8 pt-6 border-t border-gray-200">
+                    <a href={info.prospectusUrl} className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 hover:border-primary-500 hover:text-primary-600 text-gray-700 py-2 rounded-lg transition-colors text-sm font-medium">
+                        <Download size={16} /> Prospectus
+                    </a>
+                    </div>
                 </div>
-                </section>
-            </div>
-            
-            <div className="bg-gray-50 p-6 rounded-xl h-fit border border-gray-100">
-                <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2"><Calendar className="w-5 h-5 text-primary-600" /> Key Dates</h3>
-                <ul className="space-y-4 text-sm">
-                {info.keyDates.map((item, idx) => (
-                    <li key={idx} className="flex justify-between pb-2 border-b border-gray-200 last:border-0 last:pb-0">
-                    <span className="text-gray-600">{item.event}</span>
-                    <span className="font-medium text-gray-900 text-right">{item.date}</span>
-                    </li>
-                ))}
-                </ul>
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                <a href={info.prospectusUrl} className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 hover:border-primary-500 hover:text-primary-600 text-gray-700 py-2 rounded-lg transition-colors text-sm font-medium">
-                    <Download size={16} /> Prospectus
-                </a>
-                </div>
-            </div>
+
+                {info.contactPerson && (
+                  <div className="bg-gray-50 p-6 rounded-xl border border-gray-100">
+                      <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                          <User size={20} className="text-primary-600" /> For Inquiries
+                      </h3>
+                      <div className="space-y-2">
+                          <p className="font-semibold text-gray-800 text-lg">{info.contactPerson.name}</p>
+                          <p className="text-sm text-gray-500 -mt-1">{info.contactPerson.role}</p>
+                          <a href={`tel:${info.contactPerson.phone}`} className="flex items-center gap-2 text-primary-700 font-semibold bg-primary-50 px-3 py-1.5 rounded-full mt-3 inline-flex hover:bg-primary-100 transition-colors">
+                              <Phone size={14} />
+                              <span>{info.contactPerson.phone}</span>
+                          </a>
+                      </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className="bg-amber-50 border-l-4 border-amber-400 p-6 rounded-r-lg my-12">

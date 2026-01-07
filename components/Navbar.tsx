@@ -56,6 +56,7 @@ export const Navbar: React.FC = () => {
       path: '/about',
       children: [
         { label: 'Introduction', path: '/about' },
+        { label: 'Our Achievements', path: '/achievements' },
         { label: 'Board of Directors', path: '/board' },
         { label: 'Our Team', path: '/team' },
       ]

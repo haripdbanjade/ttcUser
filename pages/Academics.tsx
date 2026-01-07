@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Clock, Book, Award, ArrowRight, Users, ChevronLeft, CheckCircle, Download, DollarSign, Briefcase, GraduationCap, HelpCircle, ChevronDown } from 'lucide-react';
+import { Clock, Book, Award, ArrowRight, Users, ChevronLeft, CheckCircle, Download, DollarSign, Briefcase, GraduationCap, HelpCircle, ChevronDown, Trophy, UserCheck } from 'lucide-react';
 import { programs } from '../data/programsData';
+import { facultyData } from '../data/facultyData';
 
 const Academics: React.FC = () => {
   const [selectedProgramId, setSelectedProgramId] = useState<string | null>(null);
@@ -9,6 +10,10 @@ const Academics: React.FC = () => {
   const navigate = useNavigate();
 
   const selectedProgram = programs.find(p => p.id === selectedProgramId);
+
+  const programFaculty = selectedProgram
+    ? facultyData.filter(f => selectedProgram.facultyIds.includes(f.id))
+    : [];
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
   
@@ -19,6 +24,54 @@ const Academics: React.FC = () => {
       scrollToTop();
     }
   }, [location.hash]);
+
+  const renderSyllabus = () => {
+    if (!selectedProgram) return null;
+
+    if (Array.isArray(selectedProgram.syllabus)) {
+      // Render as a single grid for simple string arrays (BBA, MBA)
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {selectedProgram.syllabus.map((subject, idx) => (
+            <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
+              <CheckCircle size={18} className="text-green-500 mt-0.5 shrink-0" />
+              <span className="font-medium text-gray-800">{subject}</span>
+            </div>
+          ))}
+        </div>
+      );
+    } else if (typeof selectedProgram.syllabus === 'object' && selectedProgram.syllabus.gradeXI) {
+      // Render two columns for structured object (+2 programs)
+      const { gradeXI, gradeXII } = selectedProgram.syllabus;
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-lg font-bold text-gray-800 mb-4">Grade XI</h3>
+            <div className="space-y-3">
+              {gradeXI.map((subject, idx) => (
+                <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
+                  <CheckCircle size={18} className="text-green-500 mt-0.5 shrink-0" />
+                  <span className="font-medium text-gray-800">{subject}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-800 mb-4">Grade XII</h3>
+            <div className="space-y-3">
+              {gradeXII.map((subject, idx) => (
+                <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
+                  <CheckCircle size={18} className="text-green-500 mt-0.5 shrink-0" />
+                  <span className="font-medium text-gray-800">{subject}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
 
   if (selectedProgram) {
     return (
@@ -69,14 +122,7 @@ const Academics: React.FC = () => {
                   <GraduationCap className="text-primary-600" /> Curriculum & Syllabus
                 </h2>
                 <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {selectedProgram.syllabus.map((subject, idx) => (
-                      <div key={idx} className="flex items-start gap-3 p-3 bg-white rounded-lg shadow-sm">
-                        <CheckCircle size={18} className="text-green-500 mt-0.5 shrink-0" />
-                        <span className="font-medium text-gray-800">{subject}</span>
-                      </div>
-                    ))}
-                  </div>
+                  {renderSyllabus()}
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <a 
                       href={selectedProgram.syllabusPdf || '#'}
@@ -103,20 +149,140 @@ const Academics: React.FC = () => {
                 </div>
               </section>
 
-              <section>
-                <h2 className="text-2xl font-bold text-gray-900 font-serif mb-6 flex items-center gap-2">
-                  <Users className="text-primary-600" /> Faculty
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {selectedProgram.faculty.map((f, idx) => (
-                    <div key={idx} className="flex flex-col items-center gap-3 bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                      <img src={f.image} alt={f.name} className="w-24 h-24 rounded-full object-cover border-4 border-primary-50" />
-                      <div className="text-center">
-                        <h4 className="font-bold text-gray-900 text-lg">{f.name}</h4>
-                        <p className="text-sm text-primary-600 font-medium">{f.role}</p>
+              {/* Achievements Section */}
+              {selectedProgram.achievementHighlights && (
+                <section>
+                  <h2 className="text-2xl font-bold text-gray-900 font-serif mb-6 flex items-center gap-2">
+                    <Trophy className="text-primary-600" /> {selectedProgram.achievementHighlights.title}
+                  </h2>
+                  
+                  {/* Stats */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    {selectedProgram.achievementHighlights.stats.map(stat => (
+                      <div key={stat.label} className="bg-gray-50 p-4 rounded-lg text-center border border-gray-100">
+                        <p className="text-2xl font-bold text-primary-600">{stat.value}</p>
+                        <p className="text-sm text-gray-600 font-medium">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Toppers Table */}
+                  {selectedProgram.achievementHighlights.topperList && (
+                    <div className="mb-8">
+                      <h3 className="text-lg font-bold text-gray-800 mb-4">Board Toppers (NEB/HSEB)</h3>
+                      <div className="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
+                        <div className="overflow-x-auto">
+                           <table className="min-w-full divide-y divide-gray-200">
+                              <thead className="bg-gray-50">
+                                 <tr>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Year</th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Student Name</th>
+                                    <th scope="col" className="px-4 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Achievement</th>
+                                 </tr>
+                              </thead>
+                              <tbody className="bg-white divide-y divide-gray-200">
+                                 {selectedProgram.achievementHighlights.topperList.slice(0, 5).map((topper, index) => ( // Show top 5
+                                    <tr key={index} className="hover:bg-gray-50">
+                                      <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-700">{topper.year}</td>
+                                      <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">{topper.name}</td>
+                                      <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-primary-600">{topper.achievement}</td>
+                                    </tr>
+                                  ))}
+                              </tbody>
+                           </table>
+                        </div>
                       </div>
                     </div>
-                  ))}
+                  )}
+
+                  {/* Alumni Lists */}
+                  {selectedProgram.achievementHighlights.alumniLists && (
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-800 mb-4">Notable Alumni</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {selectedProgram.achievementHighlights.alumniLists.map(list => (
+                          <div key={list.category} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                            <h4 className="font-bold text-gray-900 mb-3">{list.category}</h4>
+                            <ul className="space-y-2">
+                              {list.names.slice(0, 3).map((name, idx) => ( // Show top 3
+                                <li key={idx} className="flex items-center gap-2 text-gray-700 text-sm">
+                                  <UserCheck size={14} className="text-green-500" />
+                                  {name}
+                                </li>
+                              ))}
+                              {list.names.length > 3 && <li className="text-xs text-gray-500 pl-6">& many more...</li>}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  <div className="mt-8 text-center">
+                    <button onClick={() => navigate('/achievements')} className="text-primary-600 font-semibold hover:underline flex items-center gap-1 mx-auto">
+                        View All Achievements <ArrowRight size={16} />
+                    </button>
+                  </div>
+                </section>
+              )}
+
+
+              <section>
+                <h2 className="text-2xl font-bold text-gray-900 font-serif mb-6 flex items-center gap-2">
+                  <Users className="text-primary-600" /> Faculty Members
+                </h2>
+                <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200">
+                      <thead className="bg-gray-50">
+                        <tr>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Name
+                          </th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Designation
+                          </th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                            Status
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {programFaculty.map((f, idx) => {
+                          let statusTag = null;
+                          const roleLower = f.role.toLowerCase();
+                          if (roleLower.includes('head of department') || roleLower.includes('coordinator')) {
+                            statusTag = <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Department Head</span>;
+                          } else if (roleLower.includes('visiting')) {
+                            statusTag = <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Visiting</span>;
+                          } else if (roleLower.includes('vice-principal') || roleLower.includes('director') || roleLower.includes('chief')) {
+                            statusTag = <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">Leadership</span>;
+                          }
+
+                          return (
+                            <tr key={idx} className="hover:bg-gray-50">
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="flex items-center">
+                                  <div className="flex-shrink-0 h-10 w-10">
+                                    <img className="h-10 w-10 rounded-full object-cover" src={f.image} alt={f.name} />
+                                  </div>
+                                  <div className="ml-4">
+                                    <div className="text-sm font-bold text-gray-900">{f.name}</div>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                <div className="text-sm text-gray-700">{f.role}</div>
+                                {f.subject && <div className="text-xs text-gray-500">{f.subject}</div>}
+                              </td>
+                              <td className="px-6 py-4 whitespace-nowrap">
+                                {statusTag || <span className="text-sm text-gray-500">Faculty</span>}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </section>
 
